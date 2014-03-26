@@ -22,7 +22,7 @@ var box_sdk = require('../lib/box-sdk.js')();
     test.ifError(value)
 */
 
-exports['Client'] = {
+exports['Box'] = {
   setUp: function (done) {
     // setup here
     done();
@@ -30,8 +30,9 @@ exports['Client'] = {
   'no args': function (test) {
     test.expect(1);
     // tests here
-    var opts = ['askljdfas', 'asdjf', 9999, 'localhost'];
-    var box = box_sdk.createBoxInstance.apply(box_sdk, opts);
+    var opts = ['askljdfas', 'asdjf', 9999, 'localhost'],
+      boxProto = Object.create(box_sdk.Box.prototype),
+      box = box_sdk.Box.apply(boxProto, opts);
     test.deepEqual([box.client_id, box.client_secret, box.port, box.host], opts, 'should be ' + JSON.stringify(opts));
     test.done();
   },
