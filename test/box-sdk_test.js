@@ -1,6 +1,6 @@
 'use strict';
 
-var box_sdk = require('../lib/box-sdk.js');
+var box_sdk = require('../lib/box-sdk.js')();
 
 /*
   ======== A Handy Little Nodeunit Reference ========
@@ -30,9 +30,9 @@ exports['Client'] = {
   'no args': function (test) {
     test.expect(1);
     // tests here
-    var opts = ['localhost', 9999, 'askljdfas', 'asdjf'];
+    var opts = ['askljdfas', 'asdjf', 9999, 'localhost'];
     var box = box_sdk.createBoxInstance.apply(box_sdk, opts);
-    test.deepEqual([box.host, box.port, box.client_id, box.client_secret], opts, 'should be ' + JSON.stringify(opts));
+    test.deepEqual([box.client_id, box.client_secret, box.port, box.host], opts, 'should be ' + JSON.stringify(opts));
     test.done();
   },
 };

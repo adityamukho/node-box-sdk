@@ -39,6 +39,8 @@
     "base-framework": "^1.0.1",
     "router": "^0.6.2",
     "log": "^1.4.0",
-    "request": "^2.34.0"
+    "request": "^2.34.0",
+    "lodash": "^2.4.1",
+    "monologue.js": "^0.1.4"
   }
 }
