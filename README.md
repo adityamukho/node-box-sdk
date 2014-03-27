@@ -14,6 +14,7 @@ var box_sdk = require('box-sdk')({
 //OR
 var box_sdk = require('box-sdk')();
 
+//Default host: localhost
 var box = box_sdk.Box('client_id', 'client_secret', port, [host], [customLogger]);
 var connection = box.getConnection('some.email@example.com');
 
