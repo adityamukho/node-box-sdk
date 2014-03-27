@@ -1,4 +1,4 @@
-# node-box-sdk [![Build Status](https://secure.travis-ci.org/adityamukho/node-box-sdk.png?branch=master)](http://travis-ci.org/adityamukho/node-box-sdk)
+# node-box-sdk [![Build Status](https://travis-ci.org/adityamukho/node-box-sdk.svg?branch=master)](https://travis-ci.org/adityamukho/node-box-sdk)
 
 Node.js client for Box Content API.
 
