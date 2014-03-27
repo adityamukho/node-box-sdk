@@ -12,7 +12,7 @@ var box_sdk = require('box-sdk')({
 	'log-level': 'debug'
 });
 //OR
-var box_sdk = require('box-sdk')();
+//var box_sdk = require('box-sdk')(); //Default log-level: info
 
 //Default host: localhost
 var box = box_sdk.Box('client_id', 'client_secret', port, [host], [customLogger]);
