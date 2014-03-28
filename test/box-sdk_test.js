@@ -30,10 +30,16 @@ exports['Box'] = {
   'no args': function (test) {
     test.expect(1);
     // tests here
-    var opts = ['askljdfas', 'asdjf', 9999, 'localhost'],
+    var opts = {
+      client_id: 'olo6rh4kzryu7festxnbva3sqae5ne99',
+      client_secret: '5CzFpCuFKUu6L3qgAN31oRAICXmTxJ5Q',
+      port: 9999
+    },
       boxProto = Object.create(box_sdk.Box.prototype),
-      box = box_sdk.Box.apply(boxProto, opts);
-    test.deepEqual([box.client_id, box.client_secret, box.port, box.host], opts, 'should be ' + JSON.stringify(opts));
+      box = box_sdk.Box.call(boxProto, opts, false);
+    test.deepEqual([box.client_id, box.client_secret, box.port], Object.keys(opts).map(function (key) {
+      return opts[key];
+    }), 'should be ' + JSON.stringify(opts));
     test.done();
   },
 };

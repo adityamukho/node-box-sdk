@@ -1,6 +1,6 @@
 # node-box-sdk [![Build Status](https://travis-ci.org/adityamukho/node-box-sdk.svg?branch=master)](https://travis-ci.org/adityamukho/node-box-sdk)
 
-Node.js client for Box Content API.
+Node.js client for the Box.com Content API.
 
 **THIS MODULE IS UNDER CONSTRUCTION.**
 
@@ -15,7 +15,7 @@ var box_sdk = require('box-sdk')({
 //var box_sdk = require('box-sdk')(); //Default log-level: info
 
 //Default host: localhost
-var box = box_sdk.Box('client_id', 'client_secret', port, [host], [customLogger]);
+var box = box_sdk.Box('client_id', 'client_secret', port /*, host, customLogger */);
 var connection = box.getConnection('some.email@example.com');
 
 //Navigate user to the auth URL
