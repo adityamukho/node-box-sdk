@@ -1,4 +1,6 @@
-# node-box-sdk [![Build Status](https://travis-ci.org/adityamukho/node-box-sdk.svg?branch=master)](https://travis-ci.org/adityamukho/node-box-sdk)
+# node-box-sdk [![Build Status](https://travis-ci.org/adityamukho/node-box-sdk.svg?branch=master)](https://travis-ci.org/adityamukho/node-box-sdk) [![NPM version](https://badge.fury.io/js/node-box-sdk.png)](http://badge.fury.io/js/node-box-sdk) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+
+[![Npm Downloads](https://nodei.co/npm/node-box-sdk.png?downloads=true&stars=true)](https://nodei.co/npm/node-box-sdk.png?downloads=true&stars=true)
 
 Node.js client for the Box.com Content API.
 
@@ -44,5 +46,5 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 _(Nothing yet)_
 
 ## License
-Copyright (c) 2014 Aditya Mukhopadhyay  
+Copyright (c) 2014 Aditya Mukhopadhyay
 Licensed under the MIT license.

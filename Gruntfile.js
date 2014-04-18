@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 
   // Project configuration.
   grunt.initConfig({
@@ -35,14 +35,23 @@ module.exports = function(grunt) {
         tasks: ['jshint:test', 'nodeunit']
       },
     },
+    jsdoc: {
+      dist: {
+        src: ['lib/**/*.js', 'lib/*.js'],
+        options: {
+          destination: 'doc'
+        }
+      }
+    }
   });
 
   // These plugins provide necessary tasks.
   grunt.loadNpmTasks('grunt-contrib-nodeunit');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-jsdoc');
 
   // Default task.
-  grunt.registerTask('default', ['jshint', 'nodeunit']);
+  grunt.registerTask('default', ['jshint', 'nodeunit', 'jsdoc']);
 
 };

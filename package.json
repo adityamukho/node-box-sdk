@@ -32,7 +32,8 @@
     "grunt-contrib-jshint": "~0.6.4",
     "grunt-contrib-nodeunit": "~0.2.0",
     "grunt-contrib-watch": "~0.5.3",
-    "grunt": "~0.4.2"
+    "grunt": "~0.4.2",
+    "grunt-jsdoc": "^0.5.4"
   },
   "keywords": [
     "box.com",
@@ -45,7 +46,6 @@
     "log": "^1.4.0",
     "monologue.js": "^0.1.4",
     "request": "^2.34.0",
-    "router": "^0.6.2",
-    "walkdir": "0.0.7"
+    "router": "^0.6.2"
   }
 }
