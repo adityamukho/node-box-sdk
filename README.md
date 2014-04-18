@@ -1,10 +1,10 @@
 # node-box-sdk [![Build Status](https://travis-ci.org/adityamukho/node-box-sdk.svg?branch=master)](https://travis-ci.org/adityamukho/node-box-sdk) [![NPM version](https://badge.fury.io/js/node-box-sdk.png)](http://badge.fury.io/js/node-box-sdk) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 
-[![Npm Downloads](https://nodei.co/npm/node-box-sdk.png?downloads=true&stars=true)](https://nodei.co/npm/node-box-sdk.png?downloads=true&stars=true)
+[![Npm Downloads](https://nodei.co/npm/node-box-sdk.png?downloads=true&stars=true)](https://www.npmjs.org/package/box-sdk)
 
-Node.js client for the Box.com Content API.
+Node.js client for the [Box.com Content API](https://developers.box.com/docs/).
 
-**THIS MODULE IS UNDER CONSTRUCTION.**
+**THIS MODULE IS UNDER CONSTRUCTION!!**
 
 ## Getting Started
 Install the module with: `npm install box-sdk`
@@ -34,7 +34,7 @@ connection.on('tokens.set', function (data, envelope) {
 ```
 
 ## Documentation
-_(Coming soon)_
+API documentation is available in the `docs` folder.
 
 ## Examples
 _(Coming soon)_

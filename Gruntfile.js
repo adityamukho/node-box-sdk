@@ -37,7 +37,7 @@ module.exports = function (grunt) {
     },
     jsdoc: {
       dist: {
-        src: ['lib/**/*.js', 'lib/*.js'],
+        src: ['lib/**/*.js', 'lib/*.js', 'README.md'],
         options: {
           destination: 'doc'
         }
@@ -53,5 +53,4 @@ module.exports = function (grunt) {
 
   // Default task.
   grunt.registerTask('default', ['jshint', 'nodeunit', 'jsdoc']);
-
 };
