@@ -93,6 +93,251 @@
         <dl>
                 
 <dt>
+    <h4 class="name" id="AuthTokens">AuthTokens</h4>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        Authentication token object for a connection.
+    </div>
+    
+    
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Object</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+        
+        <h5 class="subsection-title">Properties:</h5>
+        
+        <dl>
+
+<table class="props">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Argument</th>
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>access_token</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">The Access Token.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>refresh_token</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">The Refresh Token.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>expires_in</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">Optional lifetime value of access token in seconds.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>restricted_to</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">Optional (possibly) list of IP from which to grant access.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>token_type</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">Optional. Value should normally be 'bearer'.</td>
+        </tr>
+	
+	
+	</tbody>
+</table></dl>
+        
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="connector.js.html">connector.js</a>, <a href="connector.js.html#line54">line 54</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+            
+                
+<dt>
     <h4 class="name" id="BoxInit">BoxInit</h4>
     
     
@@ -318,7 +563,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="box-sdk.js.html">box-sdk.js</a>, <a href="box-sdk.js.html#line21">line 21</a>
+        <a href="box-sdk.js.html">box-sdk.js</a>, <a href="box-sdk.js.html#line22">line 22</a>
     </li></ul></dd>
     
     
@@ -329,6 +574,391 @@
     <dd class="tag-see">
         <ul>
             <li><a href="https://www.npmjs.org/package/log#log-levels">Log Levels</a></li>
+        </ul>
+    </dd>
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+            
+                
+<dt>
+    <h4 class="name" id="requestCallback"><span class="type-signature"></span>requestCallback<span class="signature">(<span class="optional">error</span>, response, body)</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Called after a request is performed on a connection.
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Argument</th>
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>error</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Error</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">Any error that occurred while attempting to stop the server.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>response</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">IncomingMessage</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">The response metadata.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>body</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">The response body.</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="connector.js.html">connector.js</a>, <a href="connector.js.html#line79">line 79</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+            
+                
+<dt>
+    <h4 class="name" id="RequestHeaders">RequestHeaders</h4>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        Headers to pass alongwith a request on a connection.
+    </div>
+    
+    
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Object</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+        
+        <h5 class="subsection-title">Properties:</h5>
+        
+        <dl>
+
+<table class="props">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Argument</th>
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>If-Match</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">If-Match ETAG.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>If-None-Match</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">If-None-Match ETAG.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>Retry-After</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">Retry time in seconds.</td>
+        </tr>
+	
+	
+	</tbody>
+</table></dl>
+        
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="connector.js.html">connector.js</a>, <a href="connector.js.html#line75">line 75</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://developers.box.com/docs/#if-match">Content API Basics</a></li>
         </ul>
     </dd>
     
@@ -444,7 +1074,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="box-sdk.js.html">box-sdk.js</a>, <a href="box-sdk.js.html#line157">line 157</a>
+        <a href="box-sdk.js.html">box-sdk.js</a>, <a href="box-sdk.js.html#line159">line 159</a>
     </li></ul></dd>
     
     
@@ -483,13 +1113,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="module-box-sdk.html">box-sdk</a></li></ul><h3>Classes</h3><ul><li><a href="Box.html">Box</a></li></ul><h3><a href="global.html">Global</a></h3>
+    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="module-box-sdk.html">box-sdk</a></li></ul><h3>Externals</h3><ul><li><a href="external-IncomingMessage.html">IncomingMessage</a></li><li><a href="external-Monologue.html">Monologue</a></li></ul><h3>Classes</h3><ul><li><a href="Box.html">Box</a></li><li><a href="Connection.html">Connection</a></li></ul><h3><a href="global.html">Global</a></h3>
 </nav>
 
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Fri Apr 18 2014 15:55:25 GMT+0530 (IST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Fri Apr 18 2014 17:29:35 GMT+0530 (IST)
 </footer>
 
 <script> prettyPrint(); </script>
