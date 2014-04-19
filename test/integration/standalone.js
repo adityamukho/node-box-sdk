@@ -1,7 +1,7 @@
 var assert = require("assert");
 var box_sdk = require('../..');
 
-describe('Box', function () {
+describe('Standalone', function () {
   var box, opts,
     PORT = 9999;
 
@@ -42,7 +42,8 @@ describe('Box', function () {
       detached: false,
       stdio: 'inherit'
     });
-    casper.on('exit', function () {
+    casper.on('exit', function (code) {
+      assert.equal(code, 0);
       done();
     });
 

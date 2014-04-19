@@ -23,7 +23,7 @@ module.exports = function (grunt) {
       test: {
         options: {
           reporter: 'spec',
-          timeout: '10s'
+          timeout: '100s'
         },
         src: ['test/integration/**/*.js']
       }
@@ -38,9 +38,9 @@ module.exports = function (grunt) {
       lib: {
         src: ['lib/**/*.js']
       },
-      test: {
-        src: ['test/**/*.js']
-      },
+      // test: {
+      //   src: ['test/**/*.js']
+      // },
     },
     watch: {
       gruntfile: {
