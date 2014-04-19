@@ -1,5 +1,14 @@
 'use strict';
 
+var fs = require('fs');
+
+if (fs.existsSync('./test/env.json')) {
+  var env = require('./test/env');
+  for (var e in env) {
+    process.env[e] = env[e];
+  }
+}
+
 module.exports = function (grunt) {
 
   // Project configuration.
