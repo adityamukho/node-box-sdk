@@ -2,19 +2,31 @@
 
 var fs = require('fs');
 
+/**
+ * Check for a local JSON file providing the enviroment variables:
+ * ICT_CLIENT_ID, ICT_CLIENT_SECRET, ICT_EMAIL_ID, ICT_PASSWORD
+ */
 if (fs.existsSync('./test/env.json')) {
   var env = require('./test/env');
   for (var e in env) {
     process.env[e] = env[e];
   }
+} else {
+  console.warn("Couldn't find env.json. This will still work in travis-ci, but local tests will fail.");
 }
 
 module.exports = function (grunt) {
 
   // Project configuration.
   grunt.initConfig({
-    nodeunit: {
-      files: ['test/**/*_test.js'],
+    mochaTest: {
+      test: {
+        options: {
+          reporter: 'spec',
+          timeout: '10s'
+        },
+        src: ['test/integration/**/*.js']
+      }
     },
     jshint: {
       options: {
@@ -55,11 +67,11 @@ module.exports = function (grunt) {
   });
 
   // These plugins provide necessary tasks.
-  grunt.loadNpmTasks('grunt-contrib-nodeunit');
+  grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-jsdoc');
 
   // Default task.
-  grunt.registerTask('default', ['jshint', 'nodeunit', 'jsdoc']);
+  grunt.registerTask('default', ['jshint', 'mochaTest', 'jsdoc']);
 };

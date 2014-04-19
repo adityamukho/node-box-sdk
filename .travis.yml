@@ -2,7 +2,7 @@ language: node_js
 node_js:
 - '0.10'
 before_script:
-- npm install -g grunt-cli
+- npm install -g grunt-cli casperjs
 env:
   global:
   - secure: cS0GihjyyTcDleM2Xt0XkyJH9sa5rIILK3psUjnyjl8yyPH5JZ36Iq3p1UG633NYtzqjM+fNp8L1UE3f+5N4CcN6GflsSdcn63lOmgffITZfNP98W586a0a1/mUqOhbAgXM52YupW/UEHGxBcofj1I/LMJwIHtfH9Djj4L6kwtA=
