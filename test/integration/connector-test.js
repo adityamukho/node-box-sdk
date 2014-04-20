@@ -33,6 +33,7 @@ describe('Connection', function () {
         access_token: 'sfsf',
         refresh_token: 'sfsdfs'
       };
+
       connection.once('tokens.set', function (tok) {
         assert.deepEqual(tok, tokens);
         assert.equal(connection.access_token, tokens.access_token);

@@ -44,17 +44,11 @@ module.exports = function (Connection) {
        * @param {RequestHeaders} [headers] - Additional headers.
        */
       getFolderInfo: function (id, done, headers) {
-        if (!_.isNumber(id)) {
+        if (!_.isNumber(parseInt(id, 10))) {
           return done(new Error('id must be specified.'));
         }
         this.request(['folders', id], 'get', done, null, null, null, headers);
       },
-
-      /**
-       * Standard {@linkcode fields/limit/offset} options, used in several connection methods.
-       * @external OptsFLO
-       * @see {@link https://developers.box.com/docs/#folders-retrieve-a-folders-items}
-       */
 
       /**
        * Retrieves the files and/or folders contained within this folder without any other metadata
@@ -72,7 +66,7 @@ module.exports = function (Connection) {
        * @param {RequestHeaders} [headers] - Additional headers.
        */
       getFolderItems: function (id, opts, done, headers) {
-        if (!_.isNumber(id)) {
+        if (!_.isNumber(parseInt(id, 10))) {
           return done(new Error('id must be specified.'));
         }
         this.request(['folders', id, 'items'], 'get', done, opts, null, null, headers);
@@ -89,7 +83,7 @@ module.exports = function (Connection) {
        * @param {RequestHeaders} [headers] - Additional headers.
        */
       createFolder: function (name, parent_id, done, headers) {
-        if (!_.isString(name) || !_.isNumber(parent_id)) {
+        if (!_.isString(name) || !_.isNumber(parseInt(parent_id, 10))) {
           return done(new Error('Invalid params. Required - name: string, parent_id: number'));
         }
         this.request(['folders'], 'post', done, null, {
@@ -120,7 +114,7 @@ module.exports = function (Connection) {
        * @param {RequestHeaders} [headers] - Additional headers.
        */
       updateFolder: function (id, fields, done, headers) {
-        if (!_.isNumber(id)) {
+        if (!_.isNumber(parseInt(id, 10))) {
           return done(new Error('id must be specified.'));
         }
         if (!_.isObject(fields)) {
@@ -147,10 +141,10 @@ module.exports = function (Connection) {
        * @param {RequestHeaders} [headers] - Additional headers.
        */
       deleteFolder: function (id, opts, done, headers) {
-        if (!_.isNumber(id)) {
+        if (!_.isNumber(parseInt(id, 10))) {
           return done(new Error('id must be specified.'));
         }
-        this.request(['folders', id], 'delete', done, opts, null, null, headers);
+        this.request(['folders', id], 'del', done, opts, null, null, headers);
       },
 
       /**
@@ -165,7 +159,7 @@ module.exports = function (Connection) {
        * @param {RequestHeaders} [headers] - Additional headers.
        */
       copyFolder: function (id, parent_id, name, done, headers) {
-        if (!_.isNumber(id) || !_.isNumber(parent_id)) {
+        if (!_.isNumber(parseInt(id, 10)) || !_.isNumber(parseInt(parent_id, 10))) {
           return done(new Error('Invalid params. Required - id: number, parent_id: number'));
         }
 
@@ -205,7 +199,7 @@ module.exports = function (Connection) {
        * @param {RequestHeaders} [headers] - Additional headers.
        */
       folderSharedLink: function (id, opts, done, headers) {
-        if (!_.isNumber(id)) {
+        if (!_.isNumber(parseInt(id, 10))) {
           return done(new Error('id must be specified.'));
         }
         this.request(['folders', id], 'put', done, null, {
@@ -224,7 +218,7 @@ module.exports = function (Connection) {
        * @param {RequestHeaders} [headers] - Additional headers.
        */
       getFolderCollaborations: function (id, done, headers) {
-        if (!_.isNumber(id)) {
+        if (!_.isNumber(parseInt(id, 10))) {
           return done(new Error('id must be specified.'));
         }
         this.request(['folders', id, 'collaborations'], 'get', done, null, null, null, headers);
@@ -258,7 +252,7 @@ module.exports = function (Connection) {
        * @param {RequestHeaders} [headers] - Additional headers.
        */
       getTrashedFolder: function (id, done, headers) {
-        if (!_.isNumber(id)) {
+        if (!_.isNumber(parseInt(id, 10))) {
           return done(new Error('id must be specified.'));
         }
         this.request(['folders', id, 'trash'], 'get', done, null, null, null, headers);
@@ -274,10 +268,10 @@ module.exports = function (Connection) {
        * @param {RequestHeaders} [headers] - Additional headers.
        */
       deleteTrashedFolder: function (id, done, headers) {
-        if (!_.isNumber(id)) {
+        if (!_.isNumber(parseInt(id, 10))) {
           return done(new Error('id must be specified.'));
         }
-        this.request(['folders', id, 'trash'], 'delete', done, null, null, null, headers);
+        this.request(['folders', id, 'trash'], 'del', done, null, null, null, headers);
       },
 
       /**
@@ -294,7 +288,7 @@ module.exports = function (Connection) {
        * @param {RequestHeaders} [headers] - Additional headers.
        */
       restoreTrashedFolder: function (id, name, parent_id, done, headers) {
-        if (!_.isString(name) || !_.isNumber(parent_id)) {
+        if ((name && !_.isString(name)) || (parent_id && !_.isNumber(parseInt(parent_id, 10)))) {
           return done(new Error('Invalid params. Required - name: string, parent_id: number'));
         }
 
@@ -327,7 +321,7 @@ module.exports = function (Connection) {
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Sat Apr 19 2014 20:50:23 GMT+0530 (IST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Sun Apr 20 2014 17:32:21 GMT+0530 (IST)
 </footer>
 
 <script> prettyPrint(); </script>
