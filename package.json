@@ -15,12 +15,10 @@
   "bugs": {
     "url": "https://github.com/adityamukho/node-box-sdk/issues"
   },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://github.com/adityamukho/node-box-sdk/blob/master/LICENSE-MIT"
-    }
-  ],
+  "licenses": [{
+    "type": "MIT",
+    "url": "https://github.com/adityamukho/node-box-sdk/blob/master/LICENSE-MIT"
+  }],
   "main": "lib/box-sdk",
   "engines": {
     "node": ">= 0.10.0"
@@ -33,7 +31,11 @@
     "grunt-contrib-jshint": "~0.6.4",
     "grunt-contrib-watch": "~0.5.3",
     "grunt-jsdoc": "^0.5.4",
-    "grunt-mocha-test": "^0.10.2"
+    "grunt-mocha-test": "^0.10.2",
+    "express": ">= 0.0.0",
+    "ejs": ">= 0.0.0",
+    "passport": ">= 0.0.0",
+    "passport-box": ">= 0.0.0"
   },
   "keywords": [
     "box.com",

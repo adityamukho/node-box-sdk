@@ -3,7 +3,7 @@ var box_sdk = require('../..');
 
 describe('Standalone', function () {
   var box, opts,
-    PORT = 9999;
+    PORT = parseInt(process.env.ICT_PORT);
 
   before(function () {
     opts = {
@@ -38,7 +38,7 @@ describe('Standalone', function () {
       'https://www.box.com/api/oauth2/authorize?response_type=code&client_id=' + opts.client_id + '&state=' + connection.csrf + '&redirect_uri=http%3A%2F%2Flocalhost%3A9999%2Fauthorize%3Fid%3D' + connection.email.replace('@', '%40'));
 
     var cp = require('child_process');
-    var casper = cp.spawn('casperjs', ['test/helpers/login.js', connection.getAuthURL(), process.env.ICT_EMAIL_ID, process.env.ICT_PASSWORD], {
+    var casper = cp.spawn('casperjs', ['test/helpers/casper/login.js', connection.getAuthURL(), process.env.ICT_EMAIL_ID, process.env.ICT_PASSWORD], {
       detached: false,
       stdio: 'inherit'
     });
