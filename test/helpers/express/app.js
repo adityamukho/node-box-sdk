@@ -78,11 +78,15 @@ app.get('/logout', function (req, res) {
   res.redirect('/');
 });
 
-app.listen(PORT);
+var server = app.listen(PORT);
 
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
   res.redirect('/login')
+}
+
+exports.stopServer = function () {
+  server.close();
 }

@@ -32,10 +32,10 @@
     "grunt-contrib-watch": "~0.5.3",
     "grunt-jsdoc": "^0.5.4",
     "grunt-mocha-test": "^0.10.2",
-    "express": ">= 0.0.0",
-    "ejs": ">= 0.0.0",
-    "passport": ">= 0.0.0",
-    "passport-box": ">= 0.0.0"
+    "express": "3.5.1",
+    "ejs": "1.0.0",
+    "passport": "0.2.0",
+    "passport-box": "0.1.0"
   },
   "keywords": [
     "box.com",
