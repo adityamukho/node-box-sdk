@@ -1,8 +1,8 @@
 'use strict';
 
-var assert = require("assert");
-
-var box_sdk = require('../..');
+var assert = require("assert"),
+  utils = require('../helpers/utils'),
+  box_sdk = require('../..');
 
 describe('Box', function () {
   var PORT = parseInt(process.env.ICT_PORT, 10);
@@ -23,6 +23,8 @@ describe('Box', function () {
       assert.doesNotThrow(function () {
         box = box_sdk.Box(opts);
       });
+
+      assert(box instanceof box_sdk.Box);
     });
 
     it('should have a running server on port ' + PORT, function (done) {
@@ -39,11 +41,8 @@ describe('Box', function () {
     it('should authorize a connection', function (done) {
       var connection = box.getConnection(process.env.ICT_EMAIL_ID);
 
-      assert.equal(connection.getAuthURL(),
-        'https://www.box.com/api/oauth2/authorize?response_type=code&client_id=' + opts.client_id + '&state=' + connection.csrf + '&redirect_uri=http%3A%2F%2Flocalhost%3A9999%2Fauthorize%3Fid%3D' + connection.email.replace('@', '%40'));
-
       var args = [connection.getAuthURL(), process.env.ICT_EMAIL_ID, process.env.ICT_PASSWORD];
-      runHeadlessClient(args, function () {
+      utils.runHeadlessClient(args, function () {
         connection.ready(function () {
           assert(connection.access_token);
           done();
@@ -72,7 +71,7 @@ describe('Box', function () {
         process.env.ICT_EMAIL_ID,
         process.env.ICT_PASSWORD
       ];
-      runHeadlessClient(args, function () {
+      utils.runHeadlessClient(args, function () {
         connection.ready(function () {
           assert(connection.access_token);
           done();
@@ -85,16 +84,3 @@ describe('Box', function () {
     });
   });
 });
-
-function runHeadlessClient(args, done) {
-  var cp = require('child_process');
-  args.unshift('test/helpers/casper/login.js');
-  var casper = cp.spawn('casperjs', args, {
-    detached: false,
-    stdio: 'inherit'
-  });
-  casper.on('exit', function (code) {
-    assert.equal(code, 0);
-    done();
-  });
-}
