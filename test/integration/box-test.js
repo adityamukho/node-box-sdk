@@ -1,9 +1,11 @@
+'use strict';
+
 var assert = require("assert");
 
 var box_sdk = require('../..');
 
 describe('Box', function () {
-  var PORT = parseInt(process.env.ICT_PORT);
+  var PORT = parseInt(process.env.ICT_PORT, 10);
 
   describe('Standalone', function () {
     var box, opts;
@@ -65,7 +67,11 @@ describe('Box', function () {
 
     it('should authorize a connection', function (done) {
       var connection = app.box.getConnection(process.env.ICT_EMAIL_ID);
-      var args = ['http://127.0.0.1:' + PORT + '/auth/box', process.env.ICT_EMAIL_ID, process.env.ICT_PASSWORD];
+      var args = [
+        'http://127.0.0.1:' + PORT + '/auth/box',
+        process.env.ICT_EMAIL_ID,
+        process.env.ICT_PASSWORD
+      ];
       runHeadlessClient(args, function () {
         connection.ready(function () {
           assert(connection.access_token);

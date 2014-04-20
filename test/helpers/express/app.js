@@ -1,12 +1,13 @@
+'use strict';
+
 var express = require('express'),
   passport = require('passport'),
-  util = require('util'),
   BoxStrategy = require('passport-box').Strategy,
   box_sdk = require('../../..');
 
 var BOX_CLIENT_ID = process.env.ICT_CLIENT_ID;
 var BOX_CLIENT_SECRET = process.env.ICT_CLIENT_SECRET;
-var PORT = parseInt(process.env.ICT_PORT);
+var PORT = parseInt(process.env.ICT_PORT, 10);
 
 var box = box_sdk.Box();
 
@@ -60,12 +61,7 @@ app.get('/login', function (req, res) {
   });
 });
 
-app.get('/auth/box',
-  passport.authenticate('box'),
-  function (req, res) {
-    // The request will be redirected to Box for authentication, so this
-    // function will not be called.
-  });
+app.get('/auth/box', passport.authenticate('box'), function (req, res) {});
 
 app.get('/auth/box/callback',
   passport.authenticate('box', {
@@ -86,11 +82,11 @@ function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
-  res.redirect('/login')
+  res.redirect('/login');
 }
 
 exports.stopServer = function () {
   server.close();
-}
+};
 
 exports.box = box;

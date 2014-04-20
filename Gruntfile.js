@@ -9,7 +9,9 @@ var fs = require('fs');
 if (fs.existsSync('./test/env.json')) {
   var env = require('./test/env');
   for (var e in env) {
-    process.env[e] = env[e];
+    if (env.hasOwnProperty(e)) {
+      process.env[e] = env[e];
+    }
   }
 } else {
   console.warn("Couldn't find env.json. This will still work in travis-ci, but local tests will fail.");
@@ -38,9 +40,9 @@ module.exports = function (grunt) {
       lib: {
         src: ['lib/**/*.js']
       },
-      // test: {
-      //   src: ['test/**/*.js']
-      // },
+      test: {
+        src: ['test/**/*.js']
+      },
     },
     watch: {
       gruntfile: {
