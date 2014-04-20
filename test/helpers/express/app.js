@@ -43,7 +43,9 @@ app.configure(function () {
 });
 
 app.get('/', function (req, res) {
-  res.render('index', req.user);
+  res.render('index', {
+    user: req.user
+  });
 });
 
 app.get('/account', ensureAuthenticated, function (req, res) {

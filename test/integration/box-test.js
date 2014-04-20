@@ -70,7 +70,8 @@ describe('Box', function () {
 
 function runHeadlessClient(args, done) {
   var cp = require('child_process');
-  var casper = cp.spawn('casperjs', args.unshift('test/helpers/casper/login.js'), {
+  args.unshift('test/helpers/casper/login.js');
+  var casper = cp.spawn('casperjs', args, {
     detached: false,
     stdio: 'inherit'
   });
