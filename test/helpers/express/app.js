@@ -92,3 +92,5 @@ function ensureAuthenticated(req, res, next) {
 exports.stopServer = function () {
   server.close();
 }
+
+exports.box = box;

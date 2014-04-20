@@ -1,4 +1,5 @@
 var assert = require("assert");
+
 var box_sdk = require('../..');
 
 describe('Box', function () {
@@ -40,7 +41,12 @@ describe('Box', function () {
         'https://www.box.com/api/oauth2/authorize?response_type=code&client_id=' + opts.client_id + '&state=' + connection.csrf + '&redirect_uri=http%3A%2F%2Flocalhost%3A9999%2Fauthorize%3Fid%3D' + connection.email.replace('@', '%40'));
 
       var args = [connection.getAuthURL(), process.env.ICT_EMAIL_ID, process.env.ICT_PASSWORD];
-      runHeadlessClient(args, done);
+      runHeadlessClient(args, function () {
+        connection.ready(function () {
+          assert(connection.access_token);
+          done();
+        });
+      });
     });
 
     after(function (done) {
@@ -58,8 +64,14 @@ describe('Box', function () {
     });
 
     it('should authorize a connection', function (done) {
+      var connection = app.box.getConnection(process.env.ICT_EMAIL_ID);
       var args = ['http://127.0.0.1:' + PORT + '/auth/box', process.env.ICT_EMAIL_ID, process.env.ICT_PASSWORD];
-      runHeadlessClient(args, done);
+      runHeadlessClient(args, function () {
+        connection.ready(function () {
+          assert(connection.access_token);
+          done();
+        });
+      });
     });
 
     after(function () {
