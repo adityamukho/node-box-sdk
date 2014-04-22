@@ -41,7 +41,7 @@ describe('Connection', function () {
 
         done();
       });
-      connection.setTokens(tokens);
+      connection._setTokens(tokens);
     });
 
     after(function (done) {

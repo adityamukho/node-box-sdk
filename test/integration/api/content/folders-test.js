@@ -2,7 +2,6 @@
 
 var assert = require("assert"),
   utils = require('../../../helpers/utils'),
-  _ = require('lodash'),
   box_sdk = require('../../../..');
 
 describe('Connection', function () {
@@ -19,30 +18,13 @@ describe('Connection', function () {
     before(function (done) {
       box = box_sdk.Box(opts);
       connection = box.getConnection(process.env.ICT_EMAIL_ID);
-      var args = [connection.getAuthURL(), process.env.ICT_EMAIL_ID, process.env.ICT_PASSWORD];
-      utils.runHeadlessClient(args, function () {
-        connection.ready(function () {
-          connection.getFolderItems(0, null, function (err, result) {
-            if (err) {
-              return done(err);
-            }
-            var test_nbsdk = _.find(result.entries, {
-              name: 'test_nbsdk'
-            });
-            if (_.isEmpty(test_nbsdk)) {
-              connection.createFolder('test_nbsdk', 0, function (err, result) {
-                if (err) {
-                  return done(err);
-                }
-                test_nbsdk_id = result.id;
-                done();
-              });
-            } else {
-              test_nbsdk_id = test_nbsdk.id;
-              done();
-            }
-          });
-        });
+
+      utils.prepTestFolder(connection, function (err, tid) {
+        if (err) {
+          return done(err);
+        }
+        test_nbsdk_id = tid;
+        done();
       });
     });
 

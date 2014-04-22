@@ -62,7 +62,9 @@ module.exports = function (grunt) {
       dist: {
         src: ['lib/**/*.js', 'lib/*.js', 'doc/README.md'],
         options: {
-          destination: 'doc'
+          destination: 'doc',
+          template: 'doc/template',
+          configure: 'doc/template/conf.json'
         }
       }
     }

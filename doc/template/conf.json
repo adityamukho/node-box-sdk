@@ -1,0 +1,20 @@
+{
+	"tags"      : {
+		"allowUnknownTags" : true
+	},
+	"templates" : {
+		"cleverLinks"     : true,
+		"monospaceLinks"  : true,
+		"default"         : {
+			"outputSourceFiles" : true
+		},
+		"systemName"      : "node-box-sdk",
+		"footer"          : "",
+		"copyright"       : "Copyright © 2014-2015 The contributors to the node-box-sdk project.",
+		"navType"         : "vertical",
+		"theme"           : "spacelab",
+		"linenums"        : true,
+		"collapseSymbols" : false,
+		"inverseNav"      : true
+	}
+}
