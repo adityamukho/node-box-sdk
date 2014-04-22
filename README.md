@@ -34,7 +34,7 @@ connection.on('tokens.set', function (data, envelope) {
 ```
 
 ## Documentation
-API documentation is available in the `docs` folder.
+API documentation is available in the `docs` folder. An online version is also hosted at http://adityamukho.github.io/node-box-sdk/
 
 ## Examples
 _(Coming soon)_
