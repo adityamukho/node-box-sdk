@@ -1,4 +1,4 @@
-# node-box-sdk
+# [Node Box SDK](https://github.com/adityamukho/node-box-sdk)
 Node.js client for the [Box.com Content API](https://developers.box.com/docs/).
 
 **THIS MODULE IS UNDER CONSTRUCTION!!**
@@ -10,5 +10,4 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 _(Nothing yet)_
 
 ## License
-Copyright (c) 2014 Aditya Mukhopadhyay
 Licensed under the MIT license.
