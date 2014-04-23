@@ -2,7 +2,8 @@
 
 var assert = require("assert"),
   _ = require('lodash'),
-  cp = require('child_process');
+  cp = require('child_process'),
+  fs = require('fs');
 
 exports.runHeadlessClient = function (args, done) {
   args.unshift('test/helpers/casper/login.js');
@@ -50,3 +51,37 @@ exports.prepTestFolder = function (connection, done) {
     });
   });
 };
+
+exports.prepSampleFile = function (done) {
+  var dest = '/tmp/testfile-' + this.uuid();
+  _copyFile(__filename, dest, function (err) {
+    if (err) {
+      return done(err);
+    }
+    done(null, dest);
+  });
+};
+
+function _copyFile(source, target, cb) {
+  var cbCalled = false;
+
+  var rd = fs.createReadStream(source);
+  rd.on("error", function (err) {
+    done(err);
+  });
+  var wr = fs.createWriteStream(target);
+  wr.on("error", function (err) {
+    done(err);
+  });
+  wr.on("close", function (ex) {
+    done();
+  });
+  rd.pipe(wr);
+
+  function done(err) {
+    if (!cbCalled) {
+      cb(err);
+      cbCalled = true;
+    }
+  }
+}
