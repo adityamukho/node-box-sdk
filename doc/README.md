@@ -75,7 +75,7 @@ Run all tests with:
 $ grunt mochaTest
 ```
 
-The test cases in the files under `test/integration` are completely self-contained, and hence can be run independently. For example:
+The files under `test/integration` are completely self-contained, and hence can be run independently. For example:
 ```bash
 $ grunt mochaTest --target=./test/integration/api/content/folders-test.js
 ```
