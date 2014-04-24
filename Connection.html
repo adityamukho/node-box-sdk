@@ -64,6 +64,10 @@
 							<a href="Connection.html#event:"tokens.set"">"tokens.set"</a>
 						</li>
 						
+						<li>
+							<a href="Connection.html#event:"tokens.unset"">"tokens.unset"</a>
+						</li>
+						
 
 					</ul>
 				</li>
@@ -75,11 +79,11 @@
 					<ul class="dropdown-menu ">
 						
 						<li>
-							<a href="external-FieldsUpdateFolder.html">FieldsUpdateFolder</a>
+							<a href="external-FieldsUpdateFile.html">FieldsUpdateFile</a>
 						</li>
 						
 						<li>
-							<a href="external-IncomingMessage.html">IncomingMessage</a>
+							<a href="external-FieldsUpdateFolder.html">FieldsUpdateFolder</a>
 						</li>
 						
 						<li>
@@ -96,6 +100,10 @@
 						
 						<li>
 							<a href="external-OptsFolderSharedLink.html">OptsFolderSharedLink</a>
+						</li>
+						
+						<li>
+							<a href="external-Readable.html">Readable</a>
 						</li>
 						
 
@@ -243,7 +251,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="connector.js.html">connector.js</a>, <a href="connector.js.html#sunlight-1-line-12">line 12</a>
+        <a href="connector.js.html">connector.js</a>, <a href="connector.js.html#sunlight-1-line-13">line 13</a>
     </li></ul></dd>
     
 
@@ -501,7 +509,7 @@ Use one of the wrapper API methods instead.
             <td class="type">
             
                 
-<span class="param-type">*</span>
+<span class="param-type"><a href="external-Readable.html">external:Readable</a></span>
 
 
             
@@ -521,7 +529,7 @@ Use one of the wrapper API methods instead.
 
             
 
-            <td class="description last">Readable stream(s) representing file data to be uploaded. Can be null.</td>
+            <td class="description last">Readable stream representing file data to be uploaded. Can be null.</td>
         </tr>
 
 	
@@ -586,7 +594,7 @@ Use one of the wrapper API methods instead.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="connector.js.html">connector.js</a>, <a href="connector.js.html#sunlight-1-line-128">line 128</a>
+        <a href="connector.js.html">connector.js</a>, <a href="connector.js.html#sunlight-1-line-143">line 143</a>
     </li></ul></dd>
     
 
@@ -598,6 +606,82 @@ Use one of the wrapper API methods instead.
 </dl>
 
     
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="_revokeAccess"><span class="type-signature">&lt;protected> </span>_revokeAccess<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+    
+    <p class="summary">Set the authentication tokens for this connection.</p>
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Normally there is no need to call this function directly.
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="connector.js.html">connector.js</a>, <a href="connector.js.html#sunlight-1-line-93">line 93</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+    
+    
+    <h5>Fires:</h5>
+    <ul>
+        <li><a href="Connection.html#event:"tokens.unset"">Connection#event:"tokens.unset"</a></li>
+    </ul>
     
 
     
@@ -706,7 +790,7 @@ Use one of the wrapper API methods instead.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="connector.js.html">connector.js</a>, <a href="connector.js.html#sunlight-1-line-73">line 73</a>
+        <a href="connector.js.html">connector.js</a>, <a href="connector.js.html#sunlight-1-line-74">line 74</a>
     </li></ul></dd>
     
 
@@ -1950,7 +2034,7 @@ a shared link, set <code>opts</code> to null.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="connector.js.html">connector.js</a>, <a href="connector.js.html#sunlight-1-line-35">line 35</a>
+        <a href="connector.js.html">connector.js</a>, <a href="connector.js.html#sunlight-1-line-36">line 36</a>
     </li></ul></dd>
     
 
@@ -1994,6 +2078,471 @@ a shared link, set <code>opts</code> to null.
 
 
         
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="getFile"><span class="type-signature"></span>getFile<span class="signature">(id, version, dest, done, <span class="optional">headers</span>)</span><span class="type-signature"></span></h4>
+    
+    
+    <p class="summary">Download a File.</p>
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Retrieves the actual data of the file. An optional <code>opts.version</code> parameter
+can be set to download a previous version of the file.
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+		<th>Argument</th>
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">The file's ID.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>version</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">File version to download. Can be null (meaning get latest).</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>dest</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Full path to where the file should be saved.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>done</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#getFileCallback">getFileCallback</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">The callback to invoke (with possible errors) when the request returns.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>headers</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#RequestHeaders">RequestHeaders</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Additional headers.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="files.js.html">api/content/files.js</a>, <a href="files.js.html#sunlight-1-line-42">line 42</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://developers.box.com/docs/#files-download-a-file">https://developers.box.com/docs/#files-download-a-file</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="getFileInfo"><span class="type-signature"></span>getFileInfo<span class="signature">(id, done, <span class="optional">headers</span>)</span><span class="type-signature"></span></h4>
+    
+    
+    <p class="summary">Get Information About a File.</p>
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Used to retrieve the metadata about a file.
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+		<th>Argument</th>
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">The file's ID.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>done</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#requestCallback">requestCallback</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">The callback to invoke (with possible errors) when the request returns.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>headers</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#RequestHeaders">RequestHeaders</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Additional headers.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="files.js.html">api/content/files.js</a>, <a href="files.js.html#sunlight-1-line-18">line 18</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://developers.box.com/docs/#files-get">https://developers.box.com/docs/#files-get</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
     
     
 </dd>
@@ -3144,7 +3693,7 @@ can be retrieved using the <code>opts.limit</code> and <code>opts.offset</code> 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="connector.js.html">connector.js</a>, <a href="connector.js.html#sunlight-1-line-159">line 159</a>
+        <a href="connector.js.html">connector.js</a>, <a href="connector.js.html#sunlight-1-line-254">line 254</a>
     </li></ul></dd>
     
 
@@ -3438,6 +3987,241 @@ the new parent folder and/or new name will need to be included in the request.
         
             
 <dt>
+    <h4 class="name" id="updateFile"><span class="type-signature"></span>updateFile<span class="signature">(id, fields, done, <span class="optional">headers</span>)</span><span class="type-signature"></span></h4>
+    
+    
+    <p class="summary">Update a file’s information.</p>
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Used to update individual or multiple fields in the file object, including renaming the file,
+changing it’s description, and creating a shared link for the file. To move a file, change
+the ID of its parent folder. An optional <code>header[If-Match]</code> header can be included
+to ensure that client only updates the file if it knows about the latest version.
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+		<th>Argument</th>
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">The file's ID.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>fields</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="external-FieldsUpdateFile.html">external:FieldsUpdateFile</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">The fields to update.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>done</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#requestCallback">requestCallback</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">The callback to invoke (with possible errors) when the request returns.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>headers</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#RequestHeaders">RequestHeaders</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Additional headers.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="files.js.html">api/content/files.js</a>, <a href="files.js.html#sunlight-1-line-91">line 91</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://developers.box.com/docs/#files-update-a-files-information">https://developers.box.com/docs/#files-update-a-files-information</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
     <h4 class="name" id="updateFolder"><span class="type-signature"></span>updateFolder<span class="signature">(id, fields, done, <span class="optional">headers</span>)</span><span class="type-signature"></span></h4>
     
     
@@ -3671,6 +4455,273 @@ the latest version.
     
 </dd>
 
+        
+            
+<dt>
+    <h4 class="name" id="uploadFile"><span class="type-signature"></span>uploadFile<span class="signature">(name, parent_id, opts, done, <span class="optional">headers</span>)</span><span class="type-signature"></span></h4>
+    
+    
+    <p class="summary">Upload a File.</p>
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Use the Uploads API to allow users to add a new file. The user can then upload a file by
+specifying the destination folder for the file. If the user provides a file name that
+already exists in the destination folder, the user will receive an error. You can
+optionally specify a <code>header[Content-MD5]</code> header with the SHA1 hash of the file
+to ensure that the file is not corrupted in transit.
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+		<th>Argument</th>
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">The fully qualified path to the local file.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>parent_id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">The parent folder's ID.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>opts</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#OptsUploadFile">OptsUploadFile</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Request options. Can be null.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>done</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#requestCallback">requestCallback</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">The callback to invoke (with possible errors) when the request returns.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>headers</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#RequestHeaders">RequestHeaders</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Additional headers.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="files.js.html">api/content/files.js</a>, <a href="files.js.html#sunlight-1-line-123">line 123</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://developers.box.com/docs/#files-upload-a-file">https://developers.box.com/docs/#files-upload-a-file</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
         </dl>
     
 
@@ -3735,7 +4786,7 @@ Preferably use the <a href="Connection.html#ready"><code>Connection#ready</code>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="connector.js.html">connector.js</a>, <a href="connector.js.html#sunlight-1-line-75">line 75</a>
+        <a href="connector.js.html">connector.js</a>, <a href="connector.js.html#sunlight-1-line-76">line 76</a>
     </li></ul></dd>
     
 
@@ -3748,6 +4799,75 @@ Preferably use the <a href="Connection.html#ready"><code>Connection#ready</code>
             <li><a href="Connection.html#ready"><code>Connection#ready</code></a></li>
         </ul>
     </dd>
+    
+
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="event:"tokens.unset"">"tokens.unset"</h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Fires when access tokens have been revoked on this connection.
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="connector.js.html">connector.js</a>, <a href="connector.js.html#sunlight-1-line-95">line 95</a>
+    </li></ul></dd>
+    
+
+    
+
     
 
     
@@ -3789,7 +4909,7 @@ Preferably use the <a href="Connection.html#ready"><code>Connection#ready</code>
 					
 		<span class="jsdoc-message">
 		Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a>
-		on Tue Apr 22 2014 13:06:10 GMT+0530 (IST) using the <a href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
+		on Thu Apr 24 2014 11:21:13 GMT+0530 (IST) using the <a href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
 		</span>
 				</footer>
 			</div>

@@ -64,6 +64,10 @@
 							<a href="Connection.html#event:"tokens.set"">"tokens.set"</a>
 						</li>
 						
+						<li>
+							<a href="Connection.html#event:"tokens.unset"">"tokens.unset"</a>
+						</li>
+						
 
 					</ul>
 				</li>
@@ -75,11 +79,11 @@
 					<ul class="dropdown-menu ">
 						
 						<li>
-							<a href="external-FieldsUpdateFolder.html">FieldsUpdateFolder</a>
+							<a href="external-FieldsUpdateFile.html">FieldsUpdateFile</a>
 						</li>
 						
 						<li>
-							<a href="external-IncomingMessage.html">IncomingMessage</a>
+							<a href="external-FieldsUpdateFolder.html">FieldsUpdateFolder</a>
 						</li>
 						
 						<li>
@@ -96,6 +100,10 @@
 						
 						<li>
 							<a href="external-OptsFolderSharedLink.html">OptsFolderSharedLink</a>
+						</li>
+						
+						<li>
+							<a href="external-Readable.html">Readable</a>
 						</li>
 						
 
@@ -414,7 +422,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="connector.js.html">connector.js</a>, <a href="connector.js.html#sunlight-1-line-56">line 56</a>
+        <a href="connector.js.html">connector.js</a>, <a href="connector.js.html#sunlight-1-line-57">line 57</a>
     </li></ul></dd>
     
 
@@ -683,7 +691,301 @@
             
                 
 <dt>
-    <h4 class="name" id="requestCallback"><span class="type-signature"></span>requestCallback<span class="signature">(<span class="optional">error</span>, response, body)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="getFileCallback"><span class="type-signature"></span>getFileCallback<span class="signature">(<span class="optional">error</span>)</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Called after a <a href="Connection.html#getFile"><code>Connection#getFile</code></a> is performed.
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+		<th>Argument</th>
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name"><code>error</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Error</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Any error that may have occurred.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="files.js.html">api/content/files.js</a>, <a href="files.js.html#sunlight-1-line-25">line 25</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+            
+                
+<dt>
+    <h4 class="name" id="OptsUploadFile">OptsUploadFile</h4>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        Options to set for <a href="Connection.html#uploadFile"><code>Connection#uploadFile</code></a>.
+    </div>
+    
+    
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Object</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+
+        <h5 class="subsection-title">Properties:</h5>
+
+        <dl>
+
+<table class="props table table-striped">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+		<th>Argument</th>
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name"><code>content_created_at</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">timestamp</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">The time this file was created on the user’s machine.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>content_modified_at</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">timestamp</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">The time this file was last modified on the user’s machine.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+</dl>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="files.js.html">api/content/files.js</a>, <a href="files.js.html#sunlight-1-line-101">line 101</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://developers.box.com/docs/#files-upload-a-file">https://developers.box.com/docs/#files-upload-a-file</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+    
+    
+</dd>
+
+            
+                
+<dt>
+    <h4 class="name" id="requestCallback"><span class="type-signature"></span>requestCallback<span class="signature">(<span class="optional">error</span>, body)</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -753,38 +1055,7 @@
 
             
 
-            <td class="description last">Any error that occurred while attempting to stop the server.</td>
-        </tr>
-
-	
-
-        <tr>
-            
-                <td class="name"><code>response</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="external-IncomingMessage.html">external:IncomingMessage</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last">The response metadata.</td>
+            <td class="description last">Any error that occurred.</td>
         </tr>
 
 	
@@ -847,7 +1118,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="connector.js.html">connector.js</a>, <a href="connector.js.html#sunlight-1-line-92">line 92</a>
+        <a href="connector.js.html">connector.js</a>, <a href="connector.js.html#sunlight-1-line-108">line 108</a>
     </li></ul></dd>
     
 
@@ -1045,7 +1316,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="connector.js.html">connector.js</a>, <a href="connector.js.html#sunlight-1-line-88">line 88</a>
+        <a href="connector.js.html">connector.js</a>, <a href="connector.js.html#sunlight-1-line-104">line 104</a>
     </li></ul></dd>
     
 
@@ -1221,7 +1492,7 @@
 					
 		<span class="jsdoc-message">
 		Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a>
-		on Tue Apr 22 2014 13:06:09 GMT+0530 (IST) using the <a href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
+		on Thu Apr 24 2014 11:21:13 GMT+0530 (IST) using the <a href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
 		</span>
 				</footer>
 			</div>

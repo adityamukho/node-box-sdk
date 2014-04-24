@@ -64,6 +64,10 @@
 							<a href="Connection.html#event:"tokens.set"">"tokens.set"</a>
 						</li>
 						
+						<li>
+							<a href="Connection.html#event:"tokens.unset"">"tokens.unset"</a>
+						</li>
+						
 
 					</ul>
 				</li>
@@ -75,11 +79,11 @@
 					<ul class="dropdown-menu ">
 						
 						<li>
-							<a href="external-FieldsUpdateFolder.html">FieldsUpdateFolder</a>
+							<a href="external-FieldsUpdateFile.html">FieldsUpdateFile</a>
 						</li>
 						
 						<li>
-							<a href="external-IncomingMessage.html">IncomingMessage</a>
+							<a href="external-FieldsUpdateFolder.html">FieldsUpdateFolder</a>
 						</li>
 						
 						<li>
@@ -96,6 +100,10 @@
 						
 						<li>
 							<a href="external-OptsFolderSharedLink.html">OptsFolderSharedLink</a>
+						</li>
+						
+						<li>
+							<a href="external-Readable.html">Readable</a>
 						</li>
 						
 
@@ -128,7 +136,8 @@ var request = require('request'),
 	base = require('base-framework'),
 	fs = require('fs'),
 	path = require('path'),
-	Monologue = require('monologue.js')(_);
+	Monologue = require('monologue.js')(_),
+	FormData = require('form-data');
 
 /**
  * @class Connection
@@ -142,7 +151,7 @@ var Connection = base.createChild().addInstanceMethods(
 		init: function (box, email) {
 			this.email = email;
 			this.csrf = Math.random().toString(36).slice(2);
-			_.each(['host', 'port', 'log', 'client_id'], function (key) {
+			_.each(['host', 'port', 'log', 'client_id', 'client_secret'], function (key) {
 				this[key] = box[key];
 			}, this);
 			return this;
@@ -205,6 +214,21 @@ var Connection = base.createChild().addInstanceMethods(
 		},
 
 		/**
+		 * Normally there is no need to call this function directly.
+		 * @summary Set the authentication tokens for this connection.
+		 * @protected
+		 * @fires Connection#"tokens.unset"
+		 */
+		_revokeAccess: function () {
+			delete this.access_token;
+			/**
+			 * Fires when access tokens have been revoked on this connection.
+			 * @event Connection#"tokens.unset"
+			 */
+			this.emit('tokens.unset');
+		},
+
+		/**
 		 * Standard {@linkcode fields/limit/offset} options, used in several connection methods.
 		 * @external OptsFLO
 		 * @see {@link https://developers.box.com/docs/#folders-retrieve-a-folders-items}
@@ -220,16 +244,15 @@ var Connection = base.createChild().addInstanceMethods(
 		 */
 
 		/**
-		 * An IncomingMessage object.
-		 * @external IncomingMessage
-		 * @see {@link http://nodejs.org/api/http.html#http_http_incomingmessage}
+		 * A Readable Stream.
+		 * @external Readable
+		 * @see {@link http://nodejs.org/api/stream.html#stream_class_stream_readable}
 		 */
 
 		/**
 		 * Called after a request is performed on a connection.
 		 * @callback requestCallback
-		 * @param {Error} [error] - Any error that occurred while attempting to stop the server.
-		 * @param {external:IncomingMessage} response - The response metadata.
+		 * @param {Error} [error] - Any error that occurred.
 		 * @param {*} body - The response body.
 		 */
 
@@ -243,34 +266,114 @@ var Connection = base.createChild().addInstanceMethods(
 		 * @param {requestCallback} callback - The callback to invoke (with possible errors) when the request returns.
 		 * @param {Object} [query] - A map of query parameters. Can be null.
 		 * @param {Object} [payload] - The request payload. Can be null.
-		 * @param {*} [data] - Readable stream(s) representing file data to be uploaded. Can be null.
+		 * @param {external:Readable} [data] - Readable stream representing file data to be uploaded. Can be null.
 		 * @param {RequestHeaders} [headers] - Additional headers.
 		 */
-		_request: function (segments, method, callback, query, payload, data, headers) {
-			if (!_.contains(['post', 'put', 'get', 'del'], method)){
+		_request: function (segments, method, callback, query, payload, data, headers, pipe) {
+			if (!_.contains(['post', 'put', 'get', 'del'], method)) {
 				throw new Error('Unsupported method: ' + method);
 			}
 			var self = this,
 				opts = {
-					url: 'https://www.box.com/api/2.0/' + segments.join('/'),
 					headers: {
 						Authorization: 'Bearer ' + self.access_token
-					},
-					json: (_.contains(['post', 'put'], method)) ? payload : true,
-					qs: query,
+					}
 				};
+
+			if (data) {
+				_.merge(opts, {
+					url: 'https://upload.box.com/api/2.0/' + segments.join('/'),
+					json: true
+				});
+			} else {
+				_.merge(opts, {
+					url: 'https://www.box.com/api/2.0/' + segments.join('/'),
+					json: (_.contains(['post', 'put'], method)) ? payload : true,
+					qs: query
+				});
+			}
 
 			headers = headers || {};
 			_.merge(opts.headers, headers);
 
-			request[method].call(request, opts, function (err, res, body) {
+			if (data) {
+				var form = new FormData();
+
+				form.append('filename', data);
+				_.forIn(payload, function (value, key) {
+					form.append(key, value);
+				});
+
+				form.getLength(function (err, length) {
+					if (err) {
+						return callback(err);
+					}
+
+					var r = request.post(opts, _handler);
+					r._form = form;
+					r.setHeader('content-length', length);
+				});
+			} else {
+				if (pipe && method === 'get') {
+					opts.followRedirect = false;
+				}
+				request[method].call(request, opts, _handler);
+			}
+
+			function _handler(err, res, body) {
 				if (err) {
 					self.log.error(err);
 					self.log.debug(res);
 					self.log.debug(body);
 				}
-				callback(err, body);
-			});
+
+				switch (res.statusCode) {
+				case 202:
+					_.delay(function () {
+						self._request(segments, method, callback, query, payload, data, headers, pipe);
+					}, res.headers['retry-after'] * 1000);
+					break;
+
+				case 401:
+					self._revokeAccess();
+					var tokenParams = {
+						client_id: self.client_id,
+						client_secret: self.client_secret,
+						grant_type: 'refresh_token',
+						refresh_token: self.refresh_token
+					},
+						authUrl = 'https://www.box.com/api/oauth2/token';
+
+					request.post({
+						url: authUrl,
+						form: tokenParams,
+						json: true
+					}, function (err, res, body) {
+						if (err) {
+							return callback(err);
+						}
+						if (res.statusCode === 200) {
+							self._setTokens(body);
+							self._request(segments, method, callback, query, payload, data, headers, pipe);
+						} else {
+							callback(new Error(body));
+						}
+					});
+					break;
+
+				case 302:
+					request.get(res.headers.location, callback).pipe(pipe);
+					break;
+
+				case 400:
+				case 403:
+					callback(body);
+					break;
+
+				default:
+					callback(err, body);
+				}
+			}
 		},
 
 		/**
@@ -329,7 +432,7 @@ module.exports = Connection;</pre>
 					
 		<span class="jsdoc-message">
 		Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a>
-		on Tue Apr 22 2014 13:06:09 GMT+0530 (IST) using the <a href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
+		on Thu Apr 24 2014 11:21:13 GMT+0530 (IST) using the <a href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
 		</span>
 				</footer>
 			</div>
