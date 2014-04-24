@@ -99,7 +99,7 @@
 						</li>
 						
 						<li>
-							<a href="external-OptsFolderSharedLink.html">OptsFolderSharedLink</a>
+							<a href="external-OptsGetFileThumbnail.html">OptsGetFileThumbnail</a>
 						</li>
 						
 						<li>
@@ -823,7 +823,204 @@ Use one of the wrapper API methods instead.
         
             
 <dt>
-    <h4 class="name" id="copyFolder"><span class="type-signature"></span>copyFolder<span class="signature">(id, parent_id, name, done, <span class="optional">headers</span>)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="copyFile"><span class="type-signature"></span>copyFile<span class="signature">(id, parent_id, name, done)</span><span class="type-signature"></span></h4>
+    
+    
+    <p class="summary">Copy a File.</p>
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Used to create a copy of a file in another folder. The original version of the file will
+not be altered.
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The file's ID.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>parent_id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The destination parent folder's ID.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The destination file's name. Can be null.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>done</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#requestCallback">requestCallback</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The callback to invoke (with possible errors) when the request returns.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="files.js.html">api/content/files.js</a>, <a href="files.js.html#sunlight-1-line-259">line 259</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://developers.box.com/docs/#files-copy-a-file">https://developers.box.com/docs/#files-copy-a-file</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="copyFolder"><span class="type-signature"></span>copyFolder<span class="signature">(id, parent_id, name, done)</span><span class="type-signature"></span></h4>
     
     
     <p class="summary">Copy a Folder.</p>
@@ -835,6 +1032,377 @@ Use one of the wrapper API methods instead.
     <div class="description">
         Used to create a copy of a folder in another folder. The original version of the folder
 will not be altered.
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The source folder's ID.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>parent_id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The destination parent folder's ID.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The destination folder's name. Can be null.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>done</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#requestCallback">requestCallback</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The callback to invoke (with possible errors) when the request returns.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="folders.js.html">api/content/folders.js</a>, <a href="folders.js.html#sunlight-1-line-131">line 131</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://developers.box.com/docs/#folders-copy-a-folder">https://developers.box.com/docs/#folders-copy-a-folder</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="createFolder"><span class="type-signature"></span>createFolder<span class="signature">(name, parent_id, done)</span><span class="type-signature"></span></h4>
+    
+    
+    <p class="summary">Create a New Folder.</p>
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Used to create a new empty folder. The new folder will be created inside of the
+specified parent folder.
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The folder's name.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>parent_id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The parent folder's ID.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>done</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#requestCallback">requestCallback</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The callback to invoke (with possible errors) when the request returns.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="folders.js.html">api/content/folders.js</a>, <a href="folders.js.html#sunlight-1-line-56">line 56</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://developers.box.com/docs/#folders-create-a-new-folder">https://developers.box.com/docs/#folders-create-a-new-folder</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="deleteFile"><span class="type-signature"></span>deleteFile<span class="signature">(id, done, <span class="optional">headers</span>)</span><span class="type-signature"></span></h4>
+    
+    
+    <p class="summary">Delete a file.</p>
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Discards a file to the trash. The etag of the file can be included as an
+<code>header[If-Match]</code> header to prevent race conditions.
     </div>
     
 
@@ -894,69 +1462,7 @@ will not be altered.
 
             
 
-            <td class="description last">The source folder's ID.</td>
-        </tr>
-
-	
-
-        <tr>
-            
-                <td class="name"><code>parent_id</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last">The destination parent folder's ID.</td>
-        </tr>
-
-	
-
-        <tr>
-            
-                <td class="name"><code>name</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last">The destination folder's name. Can be null.</td>
+            <td class="description last">The file's ID.</td>
         </tr>
 
 	
@@ -1052,7 +1558,7 @@ will not be altered.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="folders.js.html">api/content/folders.js</a>, <a href="folders.js.html#sunlight-1-line-134">line 134</a>
+        <a href="files.js.html">api/content/files.js</a>, <a href="files.js.html#sunlight-1-line-149">line 149</a>
     </li></ul></dd>
     
 
@@ -1062,7 +1568,7 @@ will not be altered.
     <dt class="tag-see">See:</dt>
     <dd class="tag-see">
         <ul>
-            <li><a href="https://developers.box.com/docs/#folders-copy-a-folder">https://developers.box.com/docs/#folders-copy-a-folder</a></li>
+            <li><a href="https://developers.box.com/docs/#files-delete-a-file">https://developers.box.com/docs/#files-delete-a-file</a></li>
         </ul>
     </dd>
     
@@ -1087,18 +1593,17 @@ will not be altered.
         
             
 <dt>
-    <h4 class="name" id="createFolder"><span class="type-signature"></span>createFolder<span class="signature">(name, parent_id, done, <span class="optional">headers</span>)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="deleteFileVersion"><span class="type-signature"></span>deleteFileVersion<span class="signature">(id, version, done, <span class="optional">headers</span>)</span><span class="type-signature"></span></h4>
     
     
-    <p class="summary">Create a New Folder.</p>
+    <p class="summary">Delete an Old Version of a File.</p>
     
 </dt>
 <dd>
     
     
     <div class="description">
-        Used to create a new empty folder. The new folder will be created inside of the
-specified parent folder.
+        Discards a specific file version to the trash.
     </div>
     
 
@@ -1134,38 +1639,7 @@ specified parent folder.
 
         <tr>
             
-                <td class="name"><code>name</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last">The folder's name.</td>
-        </tr>
-
-	
-
-        <tr>
-            
-                <td class="name"><code>parent_id</code></td>
+                <td class="name"><code>id</code></td>
             
 
             <td class="type">
@@ -1189,7 +1663,38 @@ specified parent folder.
 
             
 
-            <td class="description last">The parent folder's ID.</td>
+            <td class="description last">The file's ID.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>version</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">File version to promote.</td>
         </tr>
 
 	
@@ -1285,7 +1790,7 @@ specified parent folder.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="folders.js.html">api/content/folders.js</a>, <a href="folders.js.html#sunlight-1-line-58">line 58</a>
+        <a href="files.js.html">api/content/files.js</a>, <a href="files.js.html#sunlight-1-line-238">line 238</a>
     </li></ul></dd>
     
 
@@ -1295,7 +1800,7 @@ specified parent folder.
     <dt class="tag-see">See:</dt>
     <dd class="tag-see">
         <ul>
-            <li><a href="https://developers.box.com/docs/#folders-create-a-new-folder">https://developers.box.com/docs/#folders-create-a-new-folder</a></li>
+            <li><a href="https://developers.box.com/docs/#files-delete-version">https://developers.box.com/docs/#files-delete-version</a></li>
         </ul>
     </dd>
     
@@ -1519,7 +2024,7 @@ included to ensure that client only deletes the folder if it knows about the lat
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="folders.js.html">api/content/folders.js</a>, <a href="folders.js.html#sunlight-1-line-116">line 116</a>
+        <a href="folders.js.html">api/content/folders.js</a>, <a href="folders.js.html#sunlight-1-line-114">line 114</a>
     </li></ul></dd>
     
 
@@ -1554,7 +2059,158 @@ included to ensure that client only deletes the folder if it knows about the lat
         
             
 <dt>
-    <h4 class="name" id="deleteTrashedFolder"><span class="type-signature"></span>deleteTrashedFolder<span class="signature">(id, done, <span class="optional">headers</span>)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="deleteTrashedFile"><span class="type-signature"></span>deleteTrashedFile<span class="signature">(id, done)</span><span class="type-signature"></span></h4>
+    
+    
+    <p class="summary">Permanently Delete a Trashed File.</p>
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Permanently deletes an item that is in the trash. The item will no longer exist in Box.
+This action cannot be undone.
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The folder's ID.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>done</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#requestCallback">requestCallback</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The callback to invoke (with possible errors) when the request returns.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="files.js.html">api/content/files.js</a>, <a href="files.js.html#sunlight-1-line-343">line 343</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://developers.box.com/docs/#files-permanently-delete-a-trashed-file">https://developers.box.com/docs/#files-permanently-delete-a-trashed-file</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="deleteTrashedFolder"><span class="type-signature"></span>deleteTrashedFolder<span class="signature">(id, done)</span><span class="type-signature"></span></h4>
     
     
     <p class="summary">Permanently Delete a Trashed Folder.</p>
@@ -1587,8 +2243,6 @@ This action cannot be undone.
 		<th>Type</th>
 
 		
-		<th>Argument</th>
-		
 
 		
 
@@ -1614,14 +2268,6 @@ This action cannot be undone.
             </td>
 
             
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
 
             
 
@@ -1645,51 +2291,10 @@ This action cannot be undone.
             </td>
 
             
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
 
             
 
             <td class="description last">The callback to invoke (with possible errors) when the request returns.</td>
-        </tr>
-
-	
-
-        <tr>
-            
-                <td class="name"><code>headers</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#RequestHeaders">RequestHeaders</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last">Additional headers.</td>
         </tr>
 
 	
@@ -1721,7 +2326,7 @@ This action cannot be undone.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="folders.js.html">api/content/folders.js</a>, <a href="folders.js.html#sunlight-1-line-243">line 243</a>
+        <a href="folders.js.html">api/content/folders.js</a>, <a href="folders.js.html#sunlight-1-line-204">line 204</a>
     </li></ul></dd>
     
 
@@ -1732,241 +2337,6 @@ This action cannot be undone.
     <dd class="tag-see">
         <ul>
             <li><a href="https://developers.box.com/docs/#folders-permanently-delete-a-trashed-folder">https://developers.box.com/docs/#folders-permanently-delete-a-trashed-folder</a></li>
-        </ul>
-    </dd>
-    
-
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <h4 class="name" id="folderSharedLink"><span class="type-signature"></span>folderSharedLink<span class="signature">(id, opts, done, <span class="optional">headers</span>)</span><span class="type-signature"></span></h4>
-    
-    
-    <p class="summary">Create a Shared Link for a Folder.</p>
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        Used to create a shared link for this particular folder.
-<a href="http://blog.box.com/2012/04/share-your-stuff-and-stay-in-control-using-box-shared-links/">Please see here</a>
-for more information on the permissions available for shared links. In order to disable
-a shared link, set <code>opts</code> to null.
-    </div>
-    
-
-    
-    
-    
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-
-		<th>Type</th>
-
-		
-		<th>Argument</th>
-		
-
-		
-
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-
-	<tbody>
-	
-
-        <tr>
-            
-                <td class="name"><code>id</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last">The folder's ID.</td>
-        </tr>
-
-	
-
-        <tr>
-            
-                <td class="name"><code>opts</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="external-OptsFolderSharedLink.html">external:OptsFolderSharedLink</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last">Link options.</td>
-        </tr>
-
-	
-
-        <tr>
-            
-                <td class="name"><code>done</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#requestCallback">requestCallback</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last">The callback to invoke (with possible errors) when the request returns.</td>
-        </tr>
-
-	
-
-        <tr>
-            
-                <td class="name"><code>headers</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#RequestHeaders">RequestHeaders</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last">Additional headers.</td>
-        </tr>
-
-	
-	</tbody>
-</table>
-
-    
-    
-    
-<dl class="details">
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="folders.js.html">api/content/folders.js</a>, <a href="folders.js.html#sunlight-1-line-174">line 174</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-    <dt class="tag-see">See:</dt>
-    <dd class="tag-see">
-        <ul>
-            <li><a href="https://developers.box.com/docs/#folders-create-a-shared-link-for-a-folder">https://developers.box.com/docs/#folders-create-a-shared-link-for-a-folder</a></li>
         </ul>
     </dd>
     
@@ -2085,7 +2455,7 @@ a shared link, set <code>opts</code> to null.
         
             
 <dt>
-    <h4 class="name" id="getFile"><span class="type-signature"></span>getFile<span class="signature">(id, version, dest, done, <span class="optional">headers</span>)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="getFile"><span class="type-signature"></span>getFile<span class="signature">(id, version, dest, done)</span><span class="type-signature"></span></h4>
     
     
     <p class="summary">Download a File.</p>
@@ -2118,8 +2488,6 @@ can be set to download a previous version of the file.
 		<th>Type</th>
 
 		
-		<th>Argument</th>
-		
 
 		
 
@@ -2145,14 +2513,6 @@ can be set to download a previous version of the file.
             </td>
 
             
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
 
             
 
@@ -2176,18 +2536,10 @@ can be set to download a previous version of the file.
             </td>
 
             
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
 
             
 
-            <td class="description last">File version to download. Can be null (meaning get latest).</td>
+            <td class="description last">File version to download. Can be null (meaning get the latest).</td>
         </tr>
 
 	
@@ -2206,14 +2558,6 @@ can be set to download a previous version of the file.
             
             </td>
 
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
             
 
             
@@ -2238,51 +2582,10 @@ can be set to download a previous version of the file.
             </td>
 
             
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
 
             
 
             <td class="description last">The callback to invoke (with possible errors) when the request returns.</td>
-        </tr>
-
-	
-
-        <tr>
-            
-                <td class="name"><code>headers</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#RequestHeaders">RequestHeaders</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last">Additional headers.</td>
         </tr>
 
 	
@@ -2325,6 +2628,156 @@ can be set to download a previous version of the file.
     <dd class="tag-see">
         <ul>
             <li><a href="https://developers.box.com/docs/#files-download-a-file">https://developers.box.com/docs/#files-download-a-file</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="getFileComments"><span class="type-signature"></span>getFileComments<span class="signature">(id, done)</span><span class="type-signature"></span></h4>
+    
+    
+    <p class="summary">View the Comments on a File.</p>
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Retrieves the comments on a particular file, if any exist.
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The file's ID.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>done</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#requestCallback">requestCallback</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The callback to invoke (with possible errors) when the request returns.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="files.js.html">api/content/files.js</a>, <a href="files.js.html#sunlight-1-line-387">line 387</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://developers.box.com/docs/#files-view-the-comments-on-a-file">https://developers.box.com/docs/#files-view-the-comments-on-a-file</a></li>
         </ul>
     </dd>
     
@@ -2550,7 +3003,506 @@ can be set to download a previous version of the file.
         
             
 <dt>
-    <h4 class="name" id="getFolderCollaborations"><span class="type-signature"></span>getFolderCollaborations<span class="signature">(id, done, <span class="optional">headers</span>)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="getFileTasks"><span class="type-signature"></span>getFileTasks<span class="signature">(id, done)</span><span class="type-signature"></span></h4>
+    
+    
+    <p class="summary">Get the tasks for a file.</p>
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Retrieves all of the tasks for given file.
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The file's ID.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>done</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#requestCallback">requestCallback</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The callback to invoke (with possible errors) when the request returns.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="files.js.html">api/content/files.js</a>, <a href="files.js.html#sunlight-1-line-402">line 402</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://developers.box.com/docs/#files-get-the-tasks-for-a-file">https://developers.box.com/docs/#files-get-the-tasks-for-a-file</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="getFileThumbnail"><span class="type-signature"></span>getFileThumbnail<span class="signature">(id, opts, dest, done)</span><span class="type-signature"></span></h4>
+    
+    
+    <p class="summary">Get a Thumbnail for a File.</p>
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Retrieves a thumbnail, or smaller image representation, of this file. Sizes of 32x32,
+64x64, 128x128, and 256x256 can be returned. Currently thumbnails are only available
+in .png format and will only be generated for image file formats.
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The file's ID.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>opts</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="external-OptsGetFileThumbnail.html">external:OptsGetFileThumbnail</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Thumbnail options.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>dest</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Full path to where the file should be saved.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>done</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#getFileCallback">getFileCallback</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The callback to invoke (with possible errors) when the request returns.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="files.js.html">api/content/files.js</a>, <a href="files.js.html#sunlight-1-line-293">line 293</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://developers.box.com/docs/#files-get-a-thumbnail-for-a-file">https://developers.box.com/docs/#files-get-a-thumbnail-for-a-file</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="getFileVersions"><span class="type-signature"></span>getFileVersions<span class="signature">(id, done)</span><span class="type-signature"></span></h4>
+    
+    
+    <p class="summary">View Versions of a File.</p>
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        If there are previous versions of this file, this method can be used to retrieve
+metadata about the older versions.
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The file's ID.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>done</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#requestCallback">requestCallback</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The callback to invoke (with possible errors) when the request returns.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="files.js.html">api/content/files.js</a>, <a href="files.js.html#sunlight-1-line-194">line 194</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://developers.box.com/docs/#files-view-versions-of-a-file">https://developers.box.com/docs/#files-view-versions-of-a-file</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="getFolderCollaborations"><span class="type-signature"></span>getFolderCollaborations<span class="signature">(id, done)</span><span class="type-signature"></span></h4>
     
     
     <p class="summary">View a Folder’s Collaborations.</p>
@@ -2584,8 +3536,6 @@ i.e. all of the users that have access to that folder.
 		<th>Type</th>
 
 		
-		<th>Argument</th>
-		
 
 		
 
@@ -2611,14 +3561,6 @@ i.e. all of the users that have access to that folder.
             </td>
 
             
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
 
             
 
@@ -2642,51 +3584,10 @@ i.e. all of the users that have access to that folder.
             </td>
 
             
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
 
             
 
             <td class="description last">The callback to invoke (with possible errors) when the request returns.</td>
-        </tr>
-
-	
-
-        <tr>
-            
-                <td class="name"><code>headers</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#RequestHeaders">RequestHeaders</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last">Additional headers.</td>
         </tr>
 
 	
@@ -2718,7 +3619,7 @@ i.e. all of the users that have access to that folder.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="folders.js.html">api/content/folders.js</a>, <a href="folders.js.html#sunlight-1-line-193">line 193</a>
+        <a href="folders.js.html">api/content/folders.js</a>, <a href="folders.js.html#sunlight-1-line-157">line 157</a>
     </li></ul></dd>
     
 
@@ -2956,7 +3857,7 @@ contained in it. The root folder of a Box account is always represented by the i
         
             
 <dt>
-    <h4 class="name" id="getFolderItems"><span class="type-signature"></span>getFolderItems<span class="signature">(id, opts, done, <span class="optional">headers</span>)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="getFolderItems"><span class="type-signature"></span>getFolderItems<span class="signature">(id, opts, done)</span><span class="type-signature"></span></h4>
     
     
     <p class="summary">Retrieve a Folder’s Items.</p>
@@ -2994,8 +3895,6 @@ Multiple attributes can be passed in separated by commas e.g.
 		<th>Type</th>
 
 		
-		<th>Argument</th>
-		
 
 		
 
@@ -3021,14 +3920,6 @@ Multiple attributes can be passed in separated by commas e.g.
             </td>
 
             
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
 
             
 
@@ -3051,14 +3942,6 @@ Multiple attributes can be passed in separated by commas e.g.
             
             </td>
 
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
             
 
             
@@ -3083,51 +3966,10 @@ Multiple attributes can be passed in separated by commas e.g.
             </td>
 
             
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
 
             
 
             <td class="description last">The callback to invoke (with possible errors) when the request returns.</td>
-        </tr>
-
-	
-
-        <tr>
-            
-                <td class="name"><code>headers</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#RequestHeaders">RequestHeaders</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last">Additional headers.</td>
         </tr>
 
 	
@@ -3159,7 +4001,7 @@ Multiple attributes can be passed in separated by commas e.g.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="folders.js.html">api/content/folders.js</a>, <a href="folders.js.html#sunlight-1-line-41">line 41</a>
+        <a href="folders.js.html">api/content/folders.js</a>, <a href="folders.js.html#sunlight-1-line-40">line 40</a>
     </li></ul></dd>
     
 
@@ -3194,10 +4036,10 @@ Multiple attributes can be passed in separated by commas e.g.
         
             
 <dt>
-    <h4 class="name" id="getTrashedFolder"><span class="type-signature"></span>getTrashedFolder<span class="signature">(id, done, <span class="optional">headers</span>)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="getTrashedFile"><span class="type-signature"></span>getTrashedFile<span class="signature">(id, done)</span><span class="type-signature"></span></h4>
     
     
-    <p class="summary">Get a Trashed Folder.</p>
+    <p class="summary">Get a Trashed File.</p>
     
 </dt>
 <dd>
@@ -3226,8 +4068,6 @@ Multiple attributes can be passed in separated by commas e.g.
 		<th>Type</th>
 
 		
-		<th>Argument</th>
-		
 
 		
 
@@ -3253,14 +4093,6 @@ Multiple attributes can be passed in separated by commas e.g.
             </td>
 
             
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
 
             
 
@@ -3284,51 +4116,10 @@ Multiple attributes can be passed in separated by commas e.g.
             </td>
 
             
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
 
             
 
             <td class="description last">The callback to invoke (with possible errors) when the request returns.</td>
-        </tr>
-
-	
-
-        <tr>
-            
-                <td class="name"><code>headers</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#RequestHeaders">RequestHeaders</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last">Additional headers.</td>
         </tr>
 
 	
@@ -3360,7 +4151,157 @@ Multiple attributes can be passed in separated by commas e.g.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="folders.js.html">api/content/folders.js</a>, <a href="folders.js.html#sunlight-1-line-227">line 227</a>
+        <a href="files.js.html">api/content/files.js</a>, <a href="files.js.html#sunlight-1-line-328">line 328</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://developers.box.com/docs/#files-get-a-trashed-file">https://developers.box.com/docs/#files-get-a-trashed-file</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="getTrashedFolder"><span class="type-signature"></span>getTrashedFolder<span class="signature">(id, done)</span><span class="type-signature"></span></h4>
+    
+    
+    <p class="summary">Get a Trashed Folder.</p>
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Retrieves an item that has been moved to the trash.
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The folder's ID.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>done</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#requestCallback">requestCallback</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The callback to invoke (with possible errors) when the request returns.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="folders.js.html">api/content/folders.js</a>, <a href="folders.js.html#sunlight-1-line-189">line 189</a>
     </li></ul></dd>
     
 
@@ -3395,7 +4336,7 @@ Multiple attributes can be passed in separated by commas e.g.
         
             
 <dt>
-    <h4 class="name" id="getTrashedItems"><span class="type-signature"></span>getTrashedItems<span class="signature">(opts, done, <span class="optional">headers</span>)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="getTrashedItems"><span class="type-signature"></span>getTrashedItems<span class="signature">(opts, done)</span><span class="type-signature"></span></h4>
     
     
     <p class="summary">Get the Items in the Trash.</p>
@@ -3434,8 +4375,6 @@ can be retrieved using the <code>opts.limit</code> and <code>opts.offset</code> 
 		<th>Type</th>
 
 		
-		<th>Argument</th>
-		
 
 		
 
@@ -3461,14 +4400,6 @@ can be retrieved using the <code>opts.limit</code> and <code>opts.offset</code> 
             </td>
 
             
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
 
             
 
@@ -3492,51 +4423,10 @@ can be retrieved using the <code>opts.limit</code> and <code>opts.offset</code> 
             </td>
 
             
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
 
             
 
             <td class="description last">The callback to invoke (with possible errors) when the request returns.</td>
-        </tr>
-
-	
-
-        <tr>
-            
-                <td class="name"><code>headers</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#RequestHeaders">RequestHeaders</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last">Additional headers.</td>
         </tr>
 
 	
@@ -3568,7 +4458,7 @@ can be retrieved using the <code>opts.limit</code> and <code>opts.offset</code> 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="folders.js.html">api/content/folders.js</a>, <a href="folders.js.html#sunlight-1-line-215">line 215</a>
+        <a href="folders.js.html">api/content/folders.js</a>, <a href="folders.js.html#sunlight-1-line-178">line 178</a>
     </li></ul></dd>
     
 
@@ -3579,6 +4469,183 @@ can be retrieved using the <code>opts.limit</code> and <code>opts.offset</code> 
     <dd class="tag-see">
         <ul>
             <li><a href="https://developers.box.com/docs/#folders-get-the-items-in-the-trash">https://developers.box.com/docs/#folders-get-the-items-in-the-trash</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="promoteFileVersion"><span class="type-signature"></span>promoteFileVersion<span class="signature">(id, version, done)</span><span class="type-signature"></span></h4>
+    
+    
+    <p class="summary">Promote an Old Version of a File.</p>
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        If there are previous versions of this file, this method can be used to promote one of the
+older versions to the top of the stack. This actually mints a copy of the old version and
+puts it on the top of the versions stack. The file will have the exact same contents, the
+same SHA1/etag, and the same name as the original. Other properties such as comments do not
+get updated to their former values.
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The file's ID.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>version</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">File version to promote.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>done</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#requestCallback">requestCallback</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The callback to invoke (with possible errors) when the request returns.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="files.js.html">api/content/files.js</a>, <a href="files.js.html#sunlight-1-line-214">line 214</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://developers.box.com/docs/#files-promote-old-version">https://developers.box.com/docs/#files-promote-old-version</a></li>
         </ul>
     </dd>
     
@@ -3693,7 +4760,7 @@ can be retrieved using the <code>opts.limit</code> and <code>opts.offset</code> 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="connector.js.html">connector.js</a>, <a href="connector.js.html#sunlight-1-line-254">line 254</a>
+        <a href="connector.js.html">connector.js</a>, <a href="connector.js.html#sunlight-1-line-264">line 264</a>
     </li></ul></dd>
     
 
@@ -3721,7 +4788,206 @@ can be retrieved using the <code>opts.limit</code> and <code>opts.offset</code> 
         
             
 <dt>
-    <h4 class="name" id="restoreTrashedFolder"><span class="type-signature"></span>restoreTrashedFolder<span class="signature">(id, name, parent_id, done, <span class="optional">headers</span>)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="restoreTrashedFile"><span class="type-signature"></span>restoreTrashedFile<span class="signature">(id, name, parent_id, done)</span><span class="type-signature"></span></h4>
+    
+    
+    <p class="summary">Restore a Trashed Item.</p>
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Restores an item that has been moved to the trash. Default behavior is to restore the
+item to the folder it was in before it was moved to the trash. If that parent folder
+no longer exists or if there is now an item with the same name in that parent folder,
+the new parent folder and/or new name will need to be included in the request.
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The file's ID.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The file's name. Can be null.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>parent_id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The parent folder's ID. Can be null.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>done</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#requestCallback">requestCallback</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The callback to invoke (with possible errors) when the request returns.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="files.js.html">api/content/files.js</a>, <a href="files.js.html#sunlight-1-line-362">line 362</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://developers.box.com/docs/#files-restore-a-trashed-item">https://developers.box.com/docs/#files-restore-a-trashed-item</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="restoreTrashedFolder"><span class="type-signature"></span>restoreTrashedFolder<span class="signature">(id, name, parent_id, done)</span><span class="type-signature"></span></h4>
     
     
     <p class="summary">Restore a Trashed Folder.</p>
@@ -3756,8 +5022,6 @@ the new parent folder and/or new name will need to be included in the request.
 		<th>Type</th>
 
 		
-		<th>Argument</th>
-		
 
 		
 
@@ -3783,14 +5047,6 @@ the new parent folder and/or new name will need to be included in the request.
             </td>
 
             
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
 
             
 
@@ -3813,14 +5069,6 @@ the new parent folder and/or new name will need to be included in the request.
             
             </td>
 
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
             
 
             
@@ -3845,14 +5093,6 @@ the new parent folder and/or new name will need to be included in the request.
             </td>
 
             
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
 
             
 
@@ -3876,51 +5116,10 @@ the new parent folder and/or new name will need to be included in the request.
             </td>
 
             
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
 
             
 
             <td class="description last">The callback to invoke (with possible errors) when the request returns.</td>
-        </tr>
-
-	
-
-        <tr>
-            
-                <td class="name"><code>headers</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#RequestHeaders">RequestHeaders</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last">Additional headers.</td>
         </tr>
 
 	
@@ -3952,7 +5151,7 @@ the new parent folder and/or new name will need to be included in the request.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="folders.js.html">api/content/folders.js</a>, <a href="folders.js.html#sunlight-1-line-263">line 263</a>
+        <a href="folders.js.html">api/content/folders.js</a>, <a href="folders.js.html#sunlight-1-line-223">line 223</a>
     </li></ul></dd>
     
 
@@ -4187,7 +5386,7 @@ to ensure that client only updates the file if it knows about the latest version
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="files.js.html">api/content/files.js</a>, <a href="files.js.html#sunlight-1-line-91">line 91</a>
+        <a href="files.js.html">api/content/files.js</a>, <a href="files.js.html#sunlight-1-line-96">line 96</a>
     </li></ul></dd>
     
 
@@ -4423,7 +5622,7 @@ the latest version.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="folders.js.html">api/content/folders.js</a>, <a href="folders.js.html#sunlight-1-line-89">line 89</a>
+        <a href="folders.js.html">api/content/folders.js</a>, <a href="folders.js.html#sunlight-1-line-87">line 87</a>
     </li></ul></dd>
     
 
@@ -4458,7 +5657,7 @@ the latest version.
         
             
 <dt>
-    <h4 class="name" id="uploadFile"><span class="type-signature"></span>uploadFile<span class="signature">(name, parent_id, opts, done, <span class="optional">headers</span>)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="uploadFile"><span class="type-signature"></span>uploadFile<span class="signature">(name, parent_id, opts, done)</span><span class="type-signature"></span></h4>
     
     
     <p class="summary">Upload a File.</p>
@@ -4473,6 +5672,205 @@ specifying the destination folder for the file. If the user provides a file name
 already exists in the destination folder, the user will receive an error. You can
 optionally specify a <code>header[Content-MD5]</code> header with the SHA1 hash of the file
 to ensure that the file is not corrupted in transit.
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The fully qualified path to the local file.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>parent_id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The parent folder's ID.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>opts</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#OptsUploadFile">OptsUploadFile</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Request options. Can be null.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>done</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#requestCallback">requestCallback</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The callback to invoke (with possible errors) when the request returns.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="files.js.html">api/content/files.js</a>, <a href="files.js.html#sunlight-1-line-128">line 128</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://developers.box.com/docs/#files-upload-a-file">https://developers.box.com/docs/#files-upload-a-file</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="uploadFileNewVersion"><span class="type-signature"></span>uploadFileNewVersion<span class="signature">(name, id, opts, done, <span class="optional">headers</span>)</span><span class="type-signature"></span></h4>
+    
+    
+    <p class="summary">Upload a New Version of a File.</p>
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        This method is used to upload a new version of an existing file in a user’s account.
+An optional <code>header[If-Match]</code> header can be included to ensure that client
+only overwrites the file if it knows about the latest version. The filename on Box
+will remain the same as the previous version.
     </div>
     
 
@@ -4539,7 +5937,7 @@ to ensure that the file is not corrupted in transit.
 
         <tr>
             
-                <td class="name"><code>parent_id</code></td>
+                <td class="name"><code>id</code></td>
             
 
             <td class="type">
@@ -4563,7 +5961,7 @@ to ensure that the file is not corrupted in transit.
 
             
 
-            <td class="description last">The parent folder's ID.</td>
+            <td class="description last">The file's ID.</td>
         </tr>
 
 	
@@ -4576,7 +5974,7 @@ to ensure that the file is not corrupted in transit.
             <td class="type">
             
                 
-<span class="param-type"><a href="global.html#OptsUploadFile">OptsUploadFile</a></span>
+<span class="param-type"><a href="global.html#OptsUploadFileNewVersion">OptsUploadFileNewVersion</a></span>
 
 
             
@@ -4690,7 +6088,7 @@ to ensure that the file is not corrupted in transit.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="files.js.html">api/content/files.js</a>, <a href="files.js.html#sunlight-1-line-123">line 123</a>
+        <a href="files.js.html">api/content/files.js</a>, <a href="files.js.html#sunlight-1-line-177">line 177</a>
     </li></ul></dd>
     
 
@@ -4700,7 +6098,7 @@ to ensure that the file is not corrupted in transit.
     <dt class="tag-see">See:</dt>
     <dd class="tag-see">
         <ul>
-            <li><a href="https://developers.box.com/docs/#files-upload-a-file">https://developers.box.com/docs/#files-upload-a-file</a></li>
+            <li><a href="https://developers.box.com/docs/#files-upload-a-new-version-of-a-file">https://developers.box.com/docs/#files-upload-a-new-version-of-a-file</a></li>
         </ul>
     </dd>
     
@@ -4909,7 +6307,7 @@ Preferably use the <a href="Connection.html#ready"><code>Connection#ready</code>
 					
 		<span class="jsdoc-message">
 		Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a>
-		on Thu Apr 24 2014 11:21:13 GMT+0530 (IST) using the <a href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
+		on Thu Apr 24 2014 16:33:10 GMT+0530 (IST) using the <a href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
 		</span>
 				</footer>
 			</div>
