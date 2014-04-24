@@ -71,6 +71,12 @@ app.get('/auth/box/callback',
 ### Testing
 Before running your tests locally, copy `test/env.json.example` to `test/env.json` and fill in correct values for the environment variables to be imported during testing.
 
+The `casperjs` and `phantomjs` executables must be available in the enviroment path. Usually it is enough to run:
+```bash
+$ (sudo) npm install -g phantomjs
+$ (sudo) npm install -g casperjs
+```
+
 Run all tests with:
 ```bash
 $ grunt mochaTest
