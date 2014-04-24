@@ -67,6 +67,19 @@ app.get('/auth/box/callback',
   });
 ```
 
+### Testing
+Before running your tests locally, copy `test/env.json.example` to `test/env.json` and fill in correct values for the environment variables to be imported during testing.
+
+Run all tests with:
+```bash
+$ grunt mochaTest
+```
+
+The test cases in the files under `test/integration` are completely self-contained, and hence can be run independently. For example:
+```bash
+$ grunt mochaTest --target=./test/integration/api/content/folders-test.js
+```
+
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
