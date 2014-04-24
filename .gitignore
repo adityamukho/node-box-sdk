@@ -2,3 +2,4 @@ node_modules
 *.sublime-*
 /test/env.json
 /dist
+/test/.tmp

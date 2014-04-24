@@ -3,6 +3,8 @@
 var assert = require("assert"),
   _ = require('lodash'),
   cp = require('child_process'),
+  crypto = require('crypto'),
+  mkdirp = require('mkdirp'),
   fs = require('fs');
 
 exports.runHeadlessClient = function (args, done) {
@@ -52,13 +54,36 @@ exports.prepTestFolder = function (connection, done) {
   });
 };
 
-exports.prepSampleFile = function (done) {
-  var dest = '/tmp/testfile-' + this.uuid();
+exports.prepSampleFile = function (connection, test_nbsdk_id, done) {
+  mkdirp.sync('test/.tmp');
+  var self = this;
+  var dest = 'test/.tmp/testfile-' + this.uuid();
   _copyFile(__filename, dest, function (err) {
-    if (err) {
-      return done(err);
-    }
-    done(null, dest);
+    assert.ifError(err);
+
+    self.shasum(dest, function (d) {
+      var headers = {
+        'Content-MD5': d
+      };
+
+      connection.uploadFile(dest, test_nbsdk_id, null, function (err, result) {
+        assert.ifError(err);
+        done(result, dest, d);
+      }, headers);
+    });
+  });
+};
+
+exports.shasum = function (filename, done) {
+  var shasum = crypto.createHash('sha1');
+  var s = fs.createReadStream(filename);
+
+  s.on('data', function (d) {
+    shasum.update(d);
+  });
+  s.on('end', function () {
+    var d = shasum.digest('hex');
+    done(d);
   });
 };
 

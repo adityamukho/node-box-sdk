@@ -2,23 +2,8 @@
 
 var fs = require('fs');
 
-/**
- * Check for a local JSON file providing the enviroment variables:
- * ICT_CLIENT_ID, ICT_CLIENT_SECRET, ICT_EMAIL_ID, ICT_PASSWORD
- */
-if (fs.existsSync('./test/env.json')) {
-  var env = require('./test/env');
-  for (var e in env) {
-    if (env.hasOwnProperty(e)) {
-      process.env[e] = env[e];
-    }
-  }
-} else {
-  console.warn("Couldn't find env.json. This will still work in travis-ci, but local tests will fail.");
-}
-
 module.exports = function (grunt) {
-
+  var src = grunt.option('target') || ['test/integration/**/*.js'];
   // Project configuration.
   grunt.initConfig({
     mochaTest: {
@@ -26,9 +11,28 @@ module.exports = function (grunt) {
         options: {
           reporter: 'spec',
           timeout: '60s',
-          slow: '10s'
+          slow: '10s',
+          require: [
+
+            function () {
+              /**
+               * Check for a local JSON file providing the enviroment variables:
+               * ICT_CLIENT_ID, ICT_CLIENT_SECRET, ICT_EMAIL_ID, ICT_PASSWORD
+               */
+              if (fs.existsSync('./test/env.json')) {
+                var env = require('./test/env');
+                for (var e in env) {
+                  if (env.hasOwnProperty(e)) {
+                    process.env[e] = env[e];
+                  }
+                }
+              } else {
+                console.warn("Couldn't find env.json. This will still work in travis-ci, but local tests will fail.");
+              }
+            }
+          ]
         },
-        src: ['test/integration/**/*.js']
+        src: src
       }
     },
     jshint: {

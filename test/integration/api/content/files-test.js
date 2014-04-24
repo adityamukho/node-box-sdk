@@ -2,6 +2,7 @@
 
 var assert = require("assert"),
   utils = require('../../../helpers/utils'),
+  rimraf = require('rimraf'),
   box_sdk = require('../../../..');
 
 describe('Connection', function () {
@@ -29,35 +30,25 @@ describe('Connection', function () {
     });
 
     it('should return a file\'s info', function (done) {
-      utils.prepSampleFile(function (err, dest) {
-        if (err) {
-          return done(err);
-        }
-        connection.uploadFile(dest, test_nbsdk_id, null, function (err, result) {
+      utils.prepSampleFile(connection, test_nbsdk_id, function (result) {
+        var fid = result.entries[0].id;
+        connection.getFileInfo(fid, function (err, result) {
           assert.ifError(err);
-          var fid = result.entries[0].id;
-          connection.getFileInfo(fid, function (err, result) {
-            assert.ifError(err);
-            assert.equal(result.id, fid);
-            assert.equal(result.type, 'file');
+          assert.equal(result.id, fid);
+          assert.equal(result.type, 'file');
 
-            done();
-          });
+          done();
         });
       });
     });
 
     it('should download a file', function (done) {
-      utils.prepSampleFile(function (err, dest) {
-        if (err) {
-          return done(err);
-        }
-        connection.uploadFile(dest, test_nbsdk_id, null, function (err, result) {
+      utils.prepSampleFile(connection, test_nbsdk_id, function (result, src, sha1) {
+        var dest = 'test/.tmp/testfile-' + utils.uuid();
+        connection.getFile(result.entries[0].id, null, dest, function (err) {
           assert.ifError(err);
-          connection.getFile(result.entries[0].id, null, function (err, result) {
-            assert.ifError(err);
-            assert(result);
-
+          utils.shasum(dest, function (digest) {
+            assert.equal(digest, sha1);
             done();
           });
         });
@@ -65,18 +56,12 @@ describe('Connection', function () {
     });
 
     it('should create a file', function (done) {
-      utils.prepSampleFile(function (err, dest) {
-        if (err) {
-          return done(err);
-        }
-        connection.uploadFile(dest, test_nbsdk_id, null, function (err, result) {
-          assert.ifError(err);
-          assert(result.entries instanceof Array);
-          assert.notEqual(result.entries.length, 0);
-          assert.equal(result.entries[0].type, 'file');
+      utils.prepSampleFile(connection, test_nbsdk_id, function (result) {
+        assert(result.entries instanceof Array);
+        assert.notEqual(result.entries.length, 0);
+        assert.equal(result.entries[0].type, 'file');
 
-          done();
-        });
+        done();
       });
     });
 
@@ -85,19 +70,13 @@ describe('Connection', function () {
         description: utils.uuid()
       };
 
-      utils.prepSampleFile(function (err, dest) {
-        if (err) {
-          return done(err);
-        }
-        connection.uploadFile(dest, test_nbsdk_id, null, function (err, result) {
+      utils.prepSampleFile(connection, test_nbsdk_id, function (result) {
+        connection.updateFile(result.entries[0].id, fields, function (err, result) {
           assert.ifError(err);
-          connection.updateFile(result.entries[0].id, fields, function (err, result) {
-            assert.ifError(err);
-            assert.equal(result.type, 'file');
-            assert.equal(result.description, fields.description);
+          assert.equal(result.type, 'file');
+          assert.equal(result.description, fields.description);
 
-            done();
-          });
+          done();
         });
       });
     });
@@ -112,6 +91,7 @@ describe('Connection', function () {
           }
         });
       }
+      rimraf.sync('test/.tmp');
       box.stopServer(done);
     });
   });

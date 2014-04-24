@@ -29,15 +29,17 @@
     "test": "grunt mochaTest"
   },
   "devDependencies": {
+    "ejs": "1.0.0",
+    "express": "3.5.1",
     "grunt": "~0.4.2",
     "grunt-contrib-jshint": "~0.6.4",
     "grunt-contrib-watch": "~0.5.3",
     "grunt-jsdoc": "^0.5.4",
     "grunt-mocha-test": "^0.10.2",
-    "express": "3.5.1",
-    "ejs": "1.0.0",
+    "mkdirp": "^0.4.0",
     "passport": "0.2.0",
-    "passport-box": "0.1.0"
+    "passport-box": "0.1.0",
+    "rimraf": "^2.2.6"
   },
   "keywords": [
     "box.com",

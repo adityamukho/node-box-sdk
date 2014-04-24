@@ -17,9 +17,9 @@ casper.then(function () {
 casper.then(function () {
   this.evaluateOrDie(function () {
     return (/Authorization code received/).test(document.body.innerText);
-  }, 'login failed');
+  }, 'PhantomJS: login failed');
 });
 
 casper.run(function () {
-  this.echo('logged in').exit();
+  this.echo('PhantomJS: logged in').exit();
 });

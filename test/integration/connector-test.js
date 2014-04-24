@@ -44,6 +44,22 @@ describe('Connection', function () {
       connection._setTokens(tokens);
     });
 
+    it('should emit a "tokens.unset" event', function (done) {
+      var tokens = {
+        access_token: 'sfsf',
+        refresh_token: 'sfsdfs'
+      };
+      connection._setTokens(tokens);
+
+      connection.once('tokens.unset', function () {
+        assert(typeof connection.access_token === 'undefined');
+        assert.equal(connection.refresh_token, tokens.refresh_token);
+
+        done();
+      });
+      connection._revokeAccess();
+    });
+
     after(function (done) {
       box.stopServer(done);
     });
