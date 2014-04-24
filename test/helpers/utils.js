@@ -32,7 +32,8 @@ exports.prepTestFolder = function (connection, done) {
   var args = [connection.getAuthURL(), process.env.ICT_EMAIL_ID, process.env.ICT_PASSWORD];
 
   this.runHeadlessClient(args, function () {
-    connection.ready(function () {
+    connection.ready(function (err) {
+      assert.ifError(err);
       connection.getFolderItems(0, null, function (err, result) {
         if (err) {
           return done(err);

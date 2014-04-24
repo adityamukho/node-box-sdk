@@ -43,7 +43,8 @@ describe('Box', function () {
 
       var args = [connection.getAuthURL(), process.env.ICT_EMAIL_ID, process.env.ICT_PASSWORD];
       utils.runHeadlessClient(args, function () {
-        connection.ready(function () {
+        connection.ready(function (err) {
+          assert.ifError(err);
           assert(connection.access_token);
           done();
         });
@@ -72,7 +73,8 @@ describe('Box', function () {
         process.env.ICT_PASSWORD
       ];
       utils.runHeadlessClient(args, function () {
-        connection.ready(function () {
+        connection.ready(function (err) {
+          assert.ifError(err);
           assert(connection.access_token);
           done();
         });

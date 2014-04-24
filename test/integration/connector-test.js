@@ -28,38 +28,6 @@ describe('Connection', function () {
         'https://www.box.com/api/oauth2/authorize?response_type=code&client_id=' + opts.client_id + '&state=' + connection.csrf + '&redirect_uri=http%3A%2F%2Flocalhost%3A' + PORT + '%2Fauthorize%3Fid%3D' + connection.email.replace('@', '%40'));
     });
 
-    it('should emit a "tokens.set" event', function (done) {
-      var tokens = {
-        access_token: 'sfsf',
-        refresh_token: 'sfsdfs'
-      };
-
-      connection.once('tokens.set', function (tok) {
-        assert.deepEqual(tok, tokens);
-        assert.equal(connection.access_token, tokens.access_token);
-        assert.equal(connection.refresh_token, tokens.refresh_token);
-
-        done();
-      });
-      connection._setTokens(tokens);
-    });
-
-    it('should emit a "tokens.unset" event', function (done) {
-      var tokens = {
-        access_token: 'sfsf',
-        refresh_token: 'sfsdfs'
-      };
-      connection._setTokens(tokens);
-
-      connection.once('tokens.unset', function () {
-        assert(typeof connection.access_token === 'undefined');
-        assert.equal(connection.refresh_token, tokens.refresh_token);
-
-        done();
-      });
-      connection._revokeAccess();
-    });
-
     after(function (done) {
       box.stopServer(done);
     });

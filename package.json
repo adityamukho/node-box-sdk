@@ -47,6 +47,7 @@
     "Content API"
   ],
   "dependencies": {
+    "async": "^0.7.0",
     "base-framework": "^1.0.1",
     "form-data": "^0.1.2",
     "lodash": "^2.4.1",
