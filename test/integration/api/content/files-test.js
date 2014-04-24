@@ -80,6 +80,76 @@ describe('Connection', function () {
       });
     });
 
+    it('should delete a file', function (done) {
+      utils.prepSampleFile(connection, test_nbsdk_id, function (result) {
+        connection.deleteFile(result.entries[0].id, function (err) {
+          assert.ifError(err);
+
+          done();
+        });
+      });
+    });
+
+    it('should create a new file version', function (done) {
+      utils.prepSampleFile(connection, test_nbsdk_id, function (result) {
+        var dest = 'test/.tmp/testfile-' + utils.uuid();
+        utils.copyFile(__filename, dest, function (err) {
+          assert.ifError(err);
+          connection.uploadFileNewVersion(dest, result.entries[0].id, null, function (err, result) {
+            assert.ifError(err);
+            assert(result.entries instanceof Array);
+            assert.notEqual(result.entries.length, 0);
+            assert.equal(result.entries[0].type, 'file');
+
+            done();
+          });
+        });
+      });
+    });
+
+    it('should return the file\'s versions');
+    it('should return an old version of the file');
+    it('should promote an older version of the file');
+    it('should delete an older version of the file');
+
+    it('should copy a file', function (done) {
+      utils.prepSampleFile(connection, test_nbsdk_id, function (result) {
+        connection.copyFile(result.entries[0].id, test_nbsdk_id, utils.uuid(), function (err, result) {
+          assert.ifError(err);
+          assert.equal(result.type, 'file');
+
+          done();
+        });
+      });
+    });
+
+    it('should download a thumbnail of the file');
+    it('should return a trashed file');
+    it('should permanently delete a trashed file');
+    it('should restore a trashed file');
+
+    it('should return a file\'s comments', function (done) {
+      utils.prepSampleFile(connection, test_nbsdk_id, function (result) {
+        connection.getFileComments(result.entries[0].id, function (err, result) {
+          assert.ifError(err);
+          assert(result.entries instanceof Array);
+
+          done();
+        });
+      });
+    });
+
+    it('should return a file\'s tasks', function (done) {
+      utils.prepSampleFile(connection, test_nbsdk_id, function (result) {
+        connection.getFileTasks(result.entries[0].id, function (err, result) {
+          assert.ifError(err);
+          assert(result.entries instanceof Array);
+
+          done();
+        });
+      });
+    });
+
     after(function (done) {
       utils.cleanup(connection, test_nbsdk_id);
       box.stopServer(done);

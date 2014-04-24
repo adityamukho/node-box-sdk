@@ -92,18 +92,6 @@ describe('Connection', function () {
       });
     });
 
-    it('should create a shared link to a folder', function (done) {
-      var opts = {
-        'can_download': 'open'
-      };
-      connection.folderSharedLink(test_nbsdk_id, opts, function (err, result) {
-        assert.ifError(err);
-        assert.equal(result.type, 'folder');
-        assert.equal(result.shared_link.permissions.can_download, true);
-        done();
-      });
-    });
-
     it('should return folder\'s collaborations', function (done) {
       connection.getFolderCollaborations(test_nbsdk_id, function (err, result) {
         assert.ifError(err);

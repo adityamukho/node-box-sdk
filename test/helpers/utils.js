@@ -59,7 +59,7 @@ exports.prepSampleFile = function (connection, test_nbsdk_id, done) {
   mkdirp.sync('test/.tmp');
   var self = this;
   var dest = 'test/.tmp/testfile-' + this.uuid();
-  _copyFile(__filename, dest, function (err) {
+  this.copyFile(__filename, dest, function (err) {
     assert.ifError(err);
 
     self.shasum(dest, function (d) {
@@ -101,7 +101,7 @@ exports.cleanup = function (connection, test_nbsdk_id) {
   rimraf.sync('test/.tmp');
 };
 
-function _copyFile(source, target, cb) {
+exports.copyFile = function (source, target, cb) {
   var cbCalled = false;
 
   var rd = fs.createReadStream(source);
@@ -123,4 +123,4 @@ function _copyFile(source, target, cb) {
       cbCalled = true;
     }
   }
-}
+};
