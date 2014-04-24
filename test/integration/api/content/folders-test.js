@@ -167,15 +167,7 @@ describe('Connection', function () {
     });
 
     after(function (done) {
-      if (test_nbsdk_id) {
-        connection.deleteFolder(test_nbsdk_id, {
-          recursive: true
-        }, function (err, result) {
-          if (err) {
-            console.error(err);
-          }
-        });
-      }
+      utils.cleanup(connection, test_nbsdk_id);
       box.stopServer(done);
     });
   });

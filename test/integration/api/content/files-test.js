@@ -2,7 +2,6 @@
 
 var assert = require("assert"),
   utils = require('../../../helpers/utils'),
-  rimraf = require('rimraf'),
   box_sdk = require('../../../..');
 
 describe('Connection', function () {
@@ -82,16 +81,7 @@ describe('Connection', function () {
     });
 
     after(function (done) {
-      if (test_nbsdk_id) {
-        connection.deleteFolder(test_nbsdk_id, {
-          recursive: true
-        }, function (err, result) {
-          if (err) {
-            console.error(err);
-          }
-        });
-      }
-      rimraf.sync('test/.tmp');
+      utils.cleanup(connection, test_nbsdk_id);
       box.stopServer(done);
     });
   });

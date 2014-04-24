@@ -5,6 +5,7 @@ var assert = require("assert"),
   cp = require('child_process'),
   crypto = require('crypto'),
   mkdirp = require('mkdirp'),
+  rimraf = require('rimraf'),
   fs = require('fs');
 
 exports.runHeadlessClient = function (args, done) {
@@ -85,6 +86,19 @@ exports.shasum = function (filename, done) {
     var d = shasum.digest('hex');
     done(d);
   });
+};
+
+exports.cleanup = function (connection, test_nbsdk_id) {
+  if (test_nbsdk_id) {
+    connection.deleteFolder(test_nbsdk_id, {
+      recursive: true
+    }, function (err, result) {
+      if (err) {
+        console.error(err);
+      }
+    });
+  }
+  rimraf.sync('test/.tmp');
 };
 
 function _copyFile(source, target, cb) {
