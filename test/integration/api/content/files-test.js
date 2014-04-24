@@ -43,12 +43,12 @@ describe('Connection', function () {
     });
 
     it('should download a file', function (done) {
-      utils.prepSampleFile(connection, test_nbsdk_id, function (result, src, sha1) {
+      utils.prepSampleFile(connection, test_nbsdk_id, function (result) {
         var dest = 'test/.tmp/testfile-' + utils.uuid();
         connection.getFile(result.entries[0].id, null, dest, function (err) {
           assert.ifError(err);
           utils.shasum(dest, function (digest) {
-            assert.equal(digest, sha1);
+            assert.equal(digest, result.entries[0].sha1);
             done();
           });
         });

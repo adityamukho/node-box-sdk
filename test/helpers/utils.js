@@ -68,7 +68,7 @@ exports.prepSampleFile = function (connection, test_nbsdk_id, done) {
 
       connection.uploadFile(dest, test_nbsdk_id, null, function (err, result) {
         assert.ifError(err);
-        done(result, dest, d);
+        done(result);
       }, headers);
     });
   });
