@@ -4,7 +4,16 @@
 
 Node.js client for the [Box.com Content API](https://developers.box.com/docs/).
 
-**THIS MODULE IS UNDER CONSTRUCTION!!**
+**This is an alpha release. Although the included integration tests offer some assurance about its usability, it is not adequately battle-tested yet.**
+
+## Supported Features
+* All File Ops
+* All Folder Ops
+* Events - Long Polling
+
+The SDK aims to abstract away the intricacies of authentication, refreshing tokens, etc. as far as possible. Hence, you will not find explicit methods to perform low-level operations.
+
+All legitimate public methods map to the high level functionality described in the [Content API docs](https://developers.box.com/docs/).
 
 ## Getting Started
 Install the module with: `npm install box-sdk`
@@ -95,13 +104,13 @@ $ grunt jsdoc
 The generated documentation is available in the `dist/docs` folder. An up-to-date online version is hosted at http://adityamukho.github.io/node-box-sdk/ .
 
 ## Examples
-See the tutorials in the documentation.
+Complete tutorials will soon be added to the documentation. In the meantime, have a look at the included test cases to get an idea of how the SDK is used.
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
-_(Nothing yet)_
+* **April 25, 2014 - v0.0.0-a1:** Supports all file and folder operations, as well as event long-polling.
 
 ## License
 Copyright (c) 2014-2015 Aditya Mukhopadhyay
