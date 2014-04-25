@@ -1,6 +1,6 @@
 # Node Box SDK [![Build Status](https://travis-ci.org/adityamukho/node-box-sdk.svg?branch=master)](https://travis-ci.org/adityamukho/node-box-sdk) [![Code Climate](https://codeclimate.com/github/adityamukho/node-box-sdk.png)](https://codeclimate.com/github/adityamukho/node-box-sdk) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 
-[![Npm Downloads](https://nodei.co/npm/node-box-sdk.png?downloads=true&stars=true)](https://www.npmjs.org/package/box-sdk)
+[![Npm Downloads](https://nodei.co/npm/box-sdk.png?downloads=true&stars=true)](https://www.npmjs.org/package/box-sdk)
 
 Node.js client for the [Box.com Content API](https://developers.box.com/docs/).
 
