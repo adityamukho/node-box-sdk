@@ -4,7 +4,7 @@
 
 Node.js client for the [Box.com Content API](https://developers.box.com/docs/).
 
-**This is an alpha release. Although the included integration tests offer some assurance about its usability, it is not adequately battle-tested yet.**
+**This is an alpha release. Although the included integration tests do offer a good deal of assurance about its usability, it has not been adequately battle-tested yet.**
 
 ## Supported Features
 * All File Ops
