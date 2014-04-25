@@ -61,11 +61,23 @@
 					<ul class="dropdown-menu ">
 						
 						<li>
-							<a href="Connection.html#event:"tokens.set"">"tokens.set"</a>
+							<a href="Connection.html#event:"polling.end"">"polling.end"</a>
 						</li>
 						
 						<li>
-							<a href="Connection.html#event:"tokens.unset"">"tokens.unset"</a>
+							<a href="Connection.html#event:"polling.error"">"polling.error"</a>
+						</li>
+						
+						<li>
+							<a href="Connection.html#event:"polling.event.{event}"">Connection#event:"polling.event.{event}"</a>
+						</li>
+						
+						<li>
+							<a href="Connection.html#event:"tokens.error"">"tokens.error"</a>
+						</li>
+						
+						<li>
+							<a href="Connection.html#event:"tokens.set"">"tokens.set"</a>
 						</li>
 						
 
@@ -104,6 +116,10 @@
 						
 						<li>
 							<a href="external-Readable.html">Readable</a>
+						</li>
+						
+						<li>
+							<a href="external-Writable.html">Writable</a>
 						</li>
 						
 
@@ -149,7 +165,7 @@ module.exports = function (Connection) {
           return done(new Error('id must be specified.'));
         }
 
-        this._request(['files', id], 'get', done, null, null, null, headers);
+        this._request(['files', id], 'GET', done, null, null, null, headers);
       },
 
       /**
@@ -196,7 +212,7 @@ module.exports = function (Connection) {
           opts.version = version;
         }
 
-        this._request(['files', id, 'content'], 'get', function (err) {
+        this._request(['files', id, 'content'], 'GET', function (err) {
           if (err) {
             done(err);
             cbCalled = true;
@@ -230,7 +246,7 @@ module.exports = function (Connection) {
           return done(new Error('An fields object must be provided.'));
         }
 
-        this._request(['files', id], 'put', done, null, fields, null, headers);
+        this._request(['files', id], 'PUT', done, null, fields, null, headers);
       },
 
       /**
@@ -251,7 +267,7 @@ module.exports = function (Connection) {
        * @see {@link https://developers.box.com/docs/#files-upload-a-file}
        * @param {string} name - The fully qualified path to the local file.
        * @param {number} parent_id - The parent folder's ID.
-       * @param {OptsUploadFile} opts - Request options. Can be null.
+       * @param {?OptsUploadFile} opts - Request options.
        * @param {requestCallback} done - The callback to invoke (with possible errors) when the request returns.
        */
       uploadFile: function (name, parent_id, opts, done) {
@@ -263,7 +279,7 @@ module.exports = function (Connection) {
         opts.parent_id = parent_id;
 
         var data = fs.createReadStream(name);
-        this._request(['files', 'content'], 'post', done, null, opts, data);
+        this._request(['files', 'content'], 'POST', done, null, opts, data);
       },
 
       /**
@@ -280,7 +296,7 @@ module.exports = function (Connection) {
           return done(new Error('id must be specified.'));
         }
 
-        this._request(['files', id], 'del', done, null, null, null, headers);
+        this._request(['files', id], 'DELETE', done, null, null, null, headers);
       },
 
       /**
@@ -299,7 +315,7 @@ module.exports = function (Connection) {
        * @see {@link https://developers.box.com/docs/#files-upload-a-new-version-of-a-file}
        * @param {string} name - The fully qualified path to the local file.
        * @param {number} id - The file's ID.
-       * @param {OptsUploadFileNewVersion} opts - Request options. Can be null.
+       * @param {?OptsUploadFileNewVersion} opts - Request options.
        * @param {requestCallback} done - The callback to invoke (with possible errors) when the request returns.
        * @param {RequestHeaders} [headers] - Additional headers.
        */
@@ -309,7 +325,7 @@ module.exports = function (Connection) {
         }
 
         var data = fs.createReadStream(name);
-        this._request(['files', id, 'content'], 'post', done, null, opts, data, headers);
+        this._request(['files', id, 'content'], 'POST', done, null, opts, data, headers);
       },
 
       /**
@@ -325,7 +341,7 @@ module.exports = function (Connection) {
           return done(new Error('id must be specified.'));
         }
 
-        this._request(['files', id, 'versions'], 'get', done);
+        this._request(['files', id, 'versions'], 'GET', done);
       },
 
       /**
@@ -352,7 +368,7 @@ module.exports = function (Connection) {
           type: 'file_version',
           id: version
         };
-        this._request(['files', id, 'versions', 'current'], 'post', done, null, payload);
+        this._request(['files', id, 'versions', 'current'], 'POST', done, null, payload);
       },
 
       /**
@@ -372,7 +388,7 @@ module.exports = function (Connection) {
           return done(new Error('version must be a number.'));
         }
 
-        this._request(['files', id, 'versions', version], 'del', done, null, null, null, headers);
+        this._request(['files', id, 'versions', version], 'DELETE', done, null, null, null, headers);
       },
 
       /**
@@ -399,7 +415,7 @@ module.exports = function (Connection) {
           opts.name = name;
         }
 
-        this._request(['files', id, 'copy'], 'post', done, null, opts);
+        this._request(['files', id, 'copy'], 'POST', done, null, opts);
       },
 
       /**
@@ -439,7 +455,7 @@ module.exports = function (Connection) {
           cbCalled = true;
         });
 
-        this._request(['files', id, 'thumbnail.png'], 'get', function (err) {
+        this._request(['files', id, 'thumbnail.png'], 'GET', function (err) {
           if (err) {
             done(err);
             cbCalled = true;
@@ -458,7 +474,7 @@ module.exports = function (Connection) {
         if (!_.isNumber(parseInt(id, 10))) {
           return done(new Error('id must be specified.'));
         }
-        this._request(['files', id, 'trash'], 'get', done);
+        this._request(['files', id, 'trash'], 'GET', done);
       },
 
       /**
@@ -473,7 +489,7 @@ module.exports = function (Connection) {
         if (!_.isNumber(parseInt(id, 10))) {
           return done(new Error('id must be specified.'));
         }
-        this._request(['files', id, 'trash'], 'del', done);
+        this._request(['files', id, 'trash'], 'DELETE', done);
       },
 
       /**
@@ -484,7 +500,7 @@ module.exports = function (Connection) {
        * @summary Restore a Trashed Item.
        * @see {@link https://developers.box.com/docs/#files-restore-a-trashed-item}
        * @param {number} id - The file's ID.
-       * @param {string} name - The file's name. Can be null.
+       * @param {?string} name - The file's name.
        * @param {number} parent_id - The parent folder's ID. Can be null.
        * @param {requestCallback} done - The callback to invoke (with possible errors) when the request returns.
        */
@@ -503,7 +519,7 @@ module.exports = function (Connection) {
           };
         }
 
-        this._request(['files', id], 'post', done, null, opts);
+        this._request(['files', id], 'POST', done, null, opts);
       },
 
       /**
@@ -518,7 +534,7 @@ module.exports = function (Connection) {
           return done(new Error('id must be specified.'));
         }
 
-        this._request(['files', id, 'comments'], 'get', done);
+        this._request(['files', id, 'comments'], 'GET', done);
       },
 
       /**
@@ -533,7 +549,7 @@ module.exports = function (Connection) {
           return done(new Error('id must be specified.'));
         }
 
-        this._request(['files', id, 'tasks'], 'get', done);
+        this._request(['files', id, 'tasks'], 'GET', done);
       }
     });
 };</pre>
@@ -557,7 +573,7 @@ module.exports = function (Connection) {
 					
 		<span class="jsdoc-message">
 		Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a>
-		on Thu Apr 24 2014 16:33:09 GMT+0530 (IST) using the <a href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
+		on Fri Apr 25 2014 12:46:04 GMT+0530 (IST) using the <a href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
 		</span>
 				</footer>
 			</div>

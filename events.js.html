@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Node Box SDK Source: api/content/events.js</title>
+
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+
+	
+	<link type="text/css" rel="stylesheet" href="styles/site.spacelab.css">
+	
+</head>
+
+<body>
+<div class="container-fluid">
+	<div class="navbar navbar-fixed-top navbar-inverse">
+		<div class="navbar-inner">
+			<a class="brand" href="index.html">Node Box SDK</a>
+			<ul class="nav">
+				
+				<li class="dropdown">
+					<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b
+						class="caret"></b></a>
+
+					<ul class="dropdown-menu ">
+						
+						<li>
+							<a href="module-box-sdk.html">box-sdk</a>
+						</li>
+						
+
+					</ul>
+				</li>
+				
+				<li class="dropdown">
+					<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b
+						class="caret"></b></a>
+
+					<ul class="dropdown-menu ">
+						
+						<li>
+							<a href="Box.html">Box</a>
+						</li>
+						
+						<li>
+							<a href="Connection.html">Connection</a>
+						</li>
+						
+
+					</ul>
+				</li>
+				
+				<li class="dropdown">
+					<a href="events.list.html" class="dropdown-toggle" data-toggle="dropdown">Events<b
+						class="caret"></b></a>
+
+					<ul class="dropdown-menu ">
+						
+						<li>
+							<a href="Connection.html#event:"polling.end"">"polling.end"</a>
+						</li>
+						
+						<li>
+							<a href="Connection.html#event:"polling.error"">"polling.error"</a>
+						</li>
+						
+						<li>
+							<a href="Connection.html#event:"polling.event.{event}"">Connection#event:"polling.event.{event}"</a>
+						</li>
+						
+						<li>
+							<a href="Connection.html#event:"tokens.error"">"tokens.error"</a>
+						</li>
+						
+						<li>
+							<a href="Connection.html#event:"tokens.set"">"tokens.set"</a>
+						</li>
+						
+
+					</ul>
+				</li>
+				
+				<li class="dropdown">
+					<a href="externals.list.html" class="dropdown-toggle" data-toggle="dropdown">Externals<b
+						class="caret"></b></a>
+
+					<ul class="dropdown-menu ">
+						
+						<li>
+							<a href="external-FieldsUpdateFile.html">FieldsUpdateFile</a>
+						</li>
+						
+						<li>
+							<a href="external-FieldsUpdateFolder.html">FieldsUpdateFolder</a>
+						</li>
+						
+						<li>
+							<a href="external-Monologue.html">Monologue</a>
+						</li>
+						
+						<li>
+							<a href="external-OptsDeleteFolder.html">OptsDeleteFolder</a>
+						</li>
+						
+						<li>
+							<a href="external-OptsFLO.html">OptsFLO</a>
+						</li>
+						
+						<li>
+							<a href="external-OptsGetFileThumbnail.html">OptsGetFileThumbnail</a>
+						</li>
+						
+						<li>
+							<a href="external-Readable.html">Readable</a>
+						</li>
+						
+						<li>
+							<a href="external-Writable.html">Writable</a>
+						</li>
+						
+
+					</ul>
+				</li>
+				
+			</ul>
+		</div>
+	</div>
+
+	<div class="row-fluid">
+
+		
+			<div class="span12">
+				
+				<div id="main">
+					
+
+
+		<h1 class="page-title">Source: api/content/events.js</h1>
+    
+    <section>
+        <article>
+            <pre class="sunlight-highlight-javascript linenums">'use strict';
+
+var async = require('async'),
+  Datastore = require('nedb'),
+  _ = require('lodash');
+
+module.exports = function (Connection) {
+  Connection.addInstanceMethods(
+    /** @lends Connection.prototype */
+    {
+      /**
+       * Start long-polling for events.
+       * @see {@link https://developers.box.com/docs/#events-long-polling}
+       * @fires Connection#"polling.error"
+       * @fires Connection#"polling.end"
+       */
+      startLongPolling: function () {
+        var self = this;
+
+        async.waterfall([
+
+          function (next) {
+            if (!self.events) {
+              self.events = new Datastore();
+              self.events.ensureIndex({
+                fieldName: 'event_id',
+                unique: true
+              });
+              self.events.ensureIndex({
+                fieldName: 'created_at',
+              }, next);
+            } else {
+              next();
+            }
+          },
+          function (next) {
+            if (!self.keepPolling) {
+              self.keepPolling = true;
+
+              async.whilst(function () {
+                return self.keepPolling;
+              }, _.bind(self._emit, self), _.noop);
+              next(null, true);
+            } else {
+              next(null, false);
+            }
+          },
+
+          function (doLongPoll, next) {
+            if (doLongPoll) {
+              async.whilst(function () {
+                return self.keepPolling;
+              }, _.bind(self._longPoll, self), function (err) {
+                if (err) {
+                  /**
+                   * Fires when an error occurs during long-polling.
+                   * @event Connection#"polling.error"
+                   * @type {Error}
+                   * @see {@link Connection#startLongPolling}
+                   */
+                  self.emit('polling.error', err);
+                } else if (!self.keepPolling) {
+                  /**
+                   * Fires when a running long-polling process ends.
+                   * @event Connection#"polling.end"
+                   * @see {@link Connection#stopLongPolling}
+                   */
+                  self.emit('polling.end');
+                }
+              });
+            }
+            next();
+          }
+        ], _.noop);
+      },
+
+      /**
+       * Stop a running long-polling process.
+       * @see {@link https://developers.box.com/docs/#events-long-polling}
+       */
+      stopLongPolling: function () {
+        this.keepPolling = false;
+      },
+
+      /**
+       * Do not call this method directly.
+       * @summary The internal long-polling sequence.
+       * @private
+       * @param {optionalErrorCallback} done - Called after finishing one round of long polling.
+       */
+      _longPoll: function (done) {
+        var self = this,
+          nsp;
+
+        async.waterfall([
+
+          function (next) {
+            self._request('https://api.box.com/2.0/events', 'GET', next, {
+              stream_position: 'now'
+            });
+          },
+          function (body, next) {
+            nsp = body.next_stream_position;
+            self._request('https://api.box.com/2.0/events', 'OPTIONS', next);
+          },
+          function (body, next) {
+            self._request(body.entries[0].url, 'GET', next, {
+              stream_position: nsp
+            });
+          },
+          function (body, next) {
+            if (!_.isEmpty(body) && (body.message === 'new_change')) {
+              self._request('https://api.box.com/2.0/events', 'GET', next, {
+                stream_position: nsp
+              });
+            } else {
+              next();
+            }
+          },
+          function (body, next) {
+            if (body) {
+              _.each(body.entries, _.bind(self._trackEvent, self));
+            }
+            next();
+          }
+        ], done);
+      },
+
+      /**
+       * Do not call this method directly.
+       * @summary The internal tracker for remote events.
+       * @private
+       * @param {Object} event - The event to push.
+       */
+      _trackEvent: function (event) {
+        var self = this;
+
+        event.monologued = false;
+        self.events.insert(event, function (err) {
+          if (!err) {
+            _.delay(function () {
+              self.events.remove({
+                event_id: event.event_id
+              });
+            }, 30000);
+          }
+        });
+      },
+
+      /**
+       * Do not call this method directly.
+       * @summary The internal event emitter.
+       * @private
+       * @param {function} done - The callback.
+       * @fires Connection#"polling.event.{event}"
+       */
+      _emit: function (done) {
+        var self = this;
+
+        async.waterfall([
+
+          function (next) {
+            _.delay(next, 15000);
+          },
+          function (next) {
+            self.events.find({
+              monologued: false
+            }).sort({
+              created_at: 1
+            }).exec(next);
+          },
+          function (items, next) {
+            _.each(items, function (item) {
+              /**
+               * Events captured from an event stream during long-polling.
+               * The event name is of the form polling.event.{event}, where {event} is the lowercased,
+               * (_ -> .)-transformed version of the source event type. This transformation helps
+               * leverage {@link external:Monologue|Monologue} subscription filters.
+               * @typedef {string} PollingEvent
+               * @see {@link https://developers.box.com/docs/#events}
+               * @example
+               * When an event of type {@linkcode ITEM_CREATE} is read from the event stream,
+               * an event {@linkcode polling.event.item.create} is emitted.
+               */
+
+              /**
+               * Fires when an event is read from the event stream during long-polling.
+               * @event Connection#"polling.event.{event}"
+               * @type {PollingEvent}
+               */
+              self.emit('polling.event.' + item.event_type.toLowerCase().replace('_', '.'), item);
+            });
+
+            self.events.update({
+              event_id: {
+                $in: _.pluck(items, 'event_id')
+              }
+            }, {
+              monologued: true
+            }, {
+              multi: true
+            }, next);
+          }
+        ], done);
+      }
+    });
+};</pre>
+        </article>
+    </section>
+
+
+
+
+
+				</div>
+
+				<div class="clearfix"></div>
+				<footer>
+					
+					
+		<span class="copyright">
+		Copyright © 2014-2015 Aditya Mukhopadhyay
+		</span>
+					<br />
+					
+		<span class="jsdoc-message">
+		Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a>
+		on Fri Apr 25 2014 12:46:04 GMT+0530 (IST) using the <a href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
+		</span>
+				</footer>
+			</div>
+
+			
+			<br clear="both">
+		</div>
+
+	</div>
+	<script src="scripts/sunlight.js"></script>
+	<script src="scripts/sunlight.javascript.js"></script>
+	<script src="scripts/sunlight-plugin.doclinks.js"></script>
+	<script src="scripts/sunlight-plugin.linenumbers.js"></script>
+	<script src="scripts/sunlight-plugin.menu.js"></script>
+	<script src="scripts/jquery.min.js"></script>
+	<script src="scripts/jquery.scrollTo.js"></script>
+	<script src="scripts/jquery.localScroll.js"></script>
+	<script src="scripts/bootstrap-dropdown.js"></script>
+	<script src="scripts/toc.js"></script>
+
+
+	<script>  Sunlight.highlightAll({lineNumbers: true,  showMenu: true, enableDoclinks: true}); </script>
+
+	<script>
+		$( function () {
+			$( "#toc" ).toc( {
+			    anchorName  : function(i, heading, prefix) {
+					return $(heading).attr("id") || ( prefix + i );
+				},
+				selectors   : "h1,h2,h3,h4",
+				showAndHide : false,
+				scrollTo    : 60
+			} );
+			$( "#toc>ul" ).addClass( "nav nav-pills nav-stacked" );
+			$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+
+		} );
+	</script>
+
+	
+
+</body>
+</html>

@@ -61,11 +61,23 @@
 					<ul class="dropdown-menu ">
 						
 						<li>
-							<a href="Connection.html#event:"tokens.set"">"tokens.set"</a>
+							<a href="Connection.html#event:"polling.end"">"polling.end"</a>
 						</li>
 						
 						<li>
-							<a href="Connection.html#event:"tokens.unset"">"tokens.unset"</a>
+							<a href="Connection.html#event:"polling.error"">"polling.error"</a>
+						</li>
+						
+						<li>
+							<a href="Connection.html#event:"polling.event.{event}"">Connection#event:"polling.event.{event}"</a>
+						</li>
+						
+						<li>
+							<a href="Connection.html#event:"tokens.error"">"tokens.error"</a>
+						</li>
+						
+						<li>
+							<a href="Connection.html#event:"tokens.set"">"tokens.set"</a>
 						</li>
 						
 
@@ -104,6 +116,10 @@
 						
 						<li>
 							<a href="external-Readable.html">Readable</a>
+						</li>
+						
+						<li>
+							<a href="external-Writable.html">Writable</a>
 						</li>
 						
 
@@ -666,7 +682,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="box-sdk.js.html">box-sdk.js</a>, <a href="box-sdk.js.html#sunlight-1-line-22">line 22</a>
+        <a href="box-sdk.js.html">box-sdk.js</a>, <a href="box-sdk.js.html#sunlight-1-line-28">line 28</a>
     </li></ul></dd>
     
 
@@ -794,6 +810,136 @@
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         <a href="files.js.html">api/content/files.js</a>, <a href="files.js.html#sunlight-1-line-26">line 26</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+            
+                
+<dt>
+    <h4 class="name" id="optionalErrorCallback"><span class="type-signature"></span>optionalErrorCallback<span class="signature">(<span class="optional">error</span>)</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        A callback with an optional error argument.
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+		<th>Argument</th>
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name"><code>error</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Error</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Any error that occurred while attempting to stop the server.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="box-sdk.js.html">box-sdk.js</a>, <a href="box-sdk.js.html#sunlight-1-line-7">line 7</a>
     </li></ul></dd>
     
 
@@ -1118,6 +1264,87 @@
             
                 
 <dt>
+    <h4 class="name" id="PollingEvent">PollingEvent</h4>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        Events captured from an event stream during long-polling.
+The event name is of the form polling.event.{event}, where {event} is the lowercased,
+(_ -> .)-transformed version of the source event type. This transformation helps
+leverage <a href="external-Monologue.html"><code>Monologue</code></a> subscription filters.
+    </div>
+    
+    
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">string</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="events.js.html">api/content/events.js</a>, <a href="events.js.html#sunlight-1-line-174">line 174</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://developers.box.com/docs/#events">https://developers.box.com/docs/#events</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+    
+    
+        <h5>Example</h5>
+        
+    <pre class="sunlight-highlight-javascript">When an event of type <code>ITEM_CREATE</code> is read from the event stream,
+an event <code>polling.event.item.create</code> is emitted.</pre>
+
+
+    
+</dd>
+
+            
+                
+<dt>
     <h4 class="name" id="requestCallback"><span class="type-signature"></span>requestCallback<span class="signature">(<span class="optional">error</span>, body)</span><span class="type-signature"></span></h4>
     
     
@@ -1201,7 +1428,7 @@
             <td class="type">
             
                 
-<span class="param-type">*</span>
+<span class="param-type">Object</span>
 
 
             
@@ -1251,7 +1478,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="connector.js.html">connector.js</a>, <a href="connector.js.html#sunlight-1-line-108">line 108</a>
+        <a href="connector.js.html">connector.js</a>, <a href="connector.js.html#sunlight-1-line-104">line 104</a>
     </li></ul></dd>
     
 
@@ -1449,7 +1676,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="connector.js.html">connector.js</a>, <a href="connector.js.html#sunlight-1-line-104">line 104</a>
+        <a href="connector.js.html">connector.js</a>, <a href="connector.js.html#sunlight-1-line-98">line 98</a>
     </li></ul></dd>
     
 
@@ -1467,136 +1694,6 @@
     
 </dl>
 
-    
-    
-</dd>
-
-            
-                
-<dt>
-    <h4 class="name" id="stopServerCallback"><span class="type-signature"></span>stopServerCallback<span class="signature">(<span class="optional">error</span>)</span><span class="type-signature"></span></h4>
-    
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        Called after a running standalone server is stopped.
-    </div>
-    
-
-    
-    
-    
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-
-		<th>Type</th>
-
-		
-		<th>Argument</th>
-		
-
-		
-
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-
-	<tbody>
-	
-
-        <tr>
-            
-                <td class="name"><code>error</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Error</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last">Any error that occurred while attempting to stop the server.</td>
-        </tr>
-
-	
-	</tbody>
-</table>
-
-    
-    
-    
-<dl class="details">
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="box-sdk.js.html">box-sdk.js</a>, <a href="box-sdk.js.html#sunlight-1-line-179">line 179</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
     
     
 </dd>
@@ -1625,7 +1722,7 @@
 					
 		<span class="jsdoc-message">
 		Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a>
-		on Thu Apr 24 2014 16:33:10 GMT+0530 (IST) using the <a href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
+		on Fri Apr 25 2014 12:46:04 GMT+0530 (IST) using the <a href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
 		</span>
 				</footer>
 			</div>
