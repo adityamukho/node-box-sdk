@@ -32,13 +32,14 @@ describe('Connection', function () {
 
     it('should emit remote events', function (done) {
       connection.startLongPolling();
-      var evtReceived = false;
+      var evtReceived = false,
+        doneCalled = false;
       connection.on('polling.event.#', function (data) {
         assert(data);
         console.log('Received event: %s', data.event_type);
         evtReceived = true;
       });
-      connection.on('polling.end', done);
+      connection.on('polling.end', _done);
       connection.on('polling.error', function (err) {
         assert.fail(err);
       });
@@ -47,13 +48,20 @@ describe('Connection', function () {
           setTimeout(function () {
             connection.stopLongPolling();
             if (!evtReceived) {
-              done(new Error('No events received'));
+              _done(new Error('No events received'));
             } else {
-              done();
+              _done();
             }
           }, 30000);
         });
       });
+
+      function _done(err) {
+        if (!doneCalled) {
+          done(err);
+          doneCalled = true;
+        }
+      }
     });
 
     after(function (done) {
