@@ -77,6 +77,38 @@ app.get('/auth/box/callback',
   });
 ```
 
+### Long Polling
+```javascript
+var connection = box.getConnection('some.email@example.com');
+
+//Navigate user to the auth URL
+console.log(connection.getAuthURL());
+
+connection.ready(function () {
+  connection.startLongPolling();
+
+  //Monologue subscription filter to catch all polling events
+  connection.on('polling.event.#', function (data) {
+    console.log('Received event: %s', data.event_type);
+
+    //Handle event
+    ...
+  });
+  connection.on('polling.end', function() {
+    //Continue with post-polling ops
+    ...
+  });
+  connection.on('polling.error', function (err) {
+    console.error(err);
+  });
+
+  //Conquer the universe, etc
+  ...
+
+  connection.stopLongPolling();
+};
+```
+
 ### Testing
 Before running your tests locally, copy `test/env.json.example` to `test/env.json` and fill in correct values for the environment variables to be imported during testing.
 
