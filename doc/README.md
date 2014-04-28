@@ -23,7 +23,13 @@ Install the module with: `npm install box-sdk`
 var box_sdk = require('box-sdk');
 
 //Default host: localhost
-var box = box_sdk.Box('client id', 'client secret', port /*, host, logLevel */);
+var box = box_sdk.Box({
+  client_id: 'client id',
+  client_secret: 'client secret',
+  port: 9999,
+  host: 'somehost', //default localhost
+  log-level: 'debug' //default info
+});
 var connection = box.getConnection('some.email@example.com');
 
 //Navigate user to the auth URL
