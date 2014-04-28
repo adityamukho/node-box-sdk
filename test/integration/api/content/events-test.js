@@ -36,7 +36,7 @@ describe('Connection', function () {
         doneCalled = false;
       connection.on('polling.event.#', function (data) {
         assert(data);
-        console.log('Received event: %s', data.event_type);
+        console.log('Received event: %s: %s', data.event_id, data.event_type);
         evtReceived = true;
       });
       connection.on('polling.end', _done);
