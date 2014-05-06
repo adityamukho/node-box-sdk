@@ -157,7 +157,8 @@ var request = require('request'),
 
 /**
  * @class Connection
- * @classdesc The Connection object: One instance for each email id. Has {@link external:Monologue|Monologue} methods mixed in.
+ * @classdesc The Connection object: One instance for each email id. Has {@link external:Monologue|Monologue}
+ * methods mixed in.
  * @param {Box} box - The Box object though which this connection is managed.
  * @param {string} email - The email account identifier to connect to.
  */
@@ -249,8 +250,18 @@ var Connection = base.createChild().addInstanceMethods(
 		 * @typedef {Object} RequestHeaders
 		 * @property {string} [If-Match] - If-Match ETAG.
 		 * @property {string} [If-None-Match] - If-None-Match ETAG.
-		 * @property {string} [Retry-After] - Retry time in seconds.
 		 * @see {@link https://developers.box.com/docs/#if-match}
+		 */
+
+		 /**
+		 * Options to configure the behaviour of the request itself.
+		 * @typedef {Object} RequestConfig
+		 * @property {number} [timeout] - The response timeout in milliseconds. Defaults to {@linkcode 120000}.
+		 * @property {number} [num_retries] - The number of retries to attempt before giving up. {@linkcode 0}
+		 * implies no retries. A negative number implies unlimited retries.
+		 * @property {number} [ebackoff] - Initial backoff interval in milliseconds. The request dispatcher will
+		 * wait for this interval before attempting a retry. The interval is doubled on each successive retry.
+		 * Defaults to {@linkcode 1000}.
 		 */
 
 		/**
@@ -285,8 +296,9 @@ var Connection = base.createChild().addInstanceMethods(
 		 * @param {?external:Readable} [data] - Readable stream representing file data to be uploaded.
 		 * @param {?RequestHeaders} [headers] - Additional headers.
 		 * @param {external:Writable} [pipe] - Writable stream representing file data to be saved.
+		 * @param {?RequestConfig} [config] - Configure the request behaviour.
 		 */
-		_request: function (segments, method, callback, query, payload, data, headers, pipe) {
+		_request: function (segments, method, callback, query, payload, data, headers, pipe, config) {
 			var methods = ['POST', 'GET', 'DELETE', 'PUT', 'OPTIONS'];
 			if (!_.contains(methods, method)) {
 				throw new Error('Unsupported method: ' + method);
@@ -294,6 +306,12 @@ var Connection = base.createChild().addInstanceMethods(
 
 			var self = this,
 				url;
+
+			config = _.merge({
+				timeout: 120000,
+				num_retries: 3,
+				ebackoff: 1000
+			}, config || {});
 
 			if (_.isString(segments)) {
 				url = segments;
@@ -308,7 +326,8 @@ var Connection = base.createChild().addInstanceMethods(
 				method: method,
 				headers: {
 					Authorization: 'Bearer ' + self.access_token
-				}
+				},
+				timeout: config.timeout
 			};
 
 			if (data) {
@@ -349,9 +368,19 @@ var Connection = base.createChild().addInstanceMethods(
 
 			function _handler(err, res, body) {
 				if (err) {
-					self.log.error(err);
-					self.log.debug(res);
-					self.log.debug(body);
+					if (config.num_retries === 0) {
+						return callback(err);
+					}
+
+					var ebck = config.ebackoff;
+
+					config.num_retries--;
+					config.ebackoff *= 2;
+					self.log.debug('Waiting %d milliseconds before retrying...', ebck);
+
+					return _.delay(function () {
+						self._request(segments, method, callback, query, payload, data, headers, pipe, config);
+					}, ebck);
 				}
 
 				switch (res.statusCode) {
@@ -359,37 +388,45 @@ var Connection = base.createChild().addInstanceMethods(
 				case 429:
 					self.log.debug('Retry-After: %d', res.headers['retry-after']);
 					_.delay(function () {
-						self._request(segments, method, callback, query, payload, data, headers, pipe);
+						self._request(segments, method, callback, query, payload, data, headers, pipe, config);
 					}, res.headers['retry-after'] * 1000);
 					break;
 
 				case 401:
-					self.log.info('Access token expired. Refreshing...');
-					self._revokeAccess();
-					var tokenParams = {
-						client_id: self.client_id,
-						client_secret: self.client_secret,
-						grant_type: 'refresh_token',
-						refresh_token: self.refresh_token
-					},
-						authUrl = 'https://www.box.com/api/oauth2/token';
+					//First check if stale access tokens still exist, and only then refresh.
+					//Prevents multiple refreshes.
+					if (self.isAuthenticated()) {
+						self.log.debug('Access token expired. Refreshing...');
+						self._revokeAccess();
+						var tokenParams = {
+							client_id: self.client_id,
+							client_secret: self.client_secret,
+							grant_type: 'refresh_token',
+							refresh_token: self.refresh_token
+						},
+							authUrl = 'https://www.box.com/api/oauth2/token';
 
-					request.post({
-						url: authUrl,
-						form: tokenParams,
-						json: true
-					}, function (err, res, body) {
-						if (err) {
-							return callback(err);
-						}
-						if (res.statusCode === 200) {
-							self.log.info('New tokens received.');
-							self._setTokens(body);
-							self._request(segments, method, callback, query, payload, data, headers, pipe);
-						} else {
-							callback(new Error(JSON.stringify(body)));
-						}
-					});
+						request.post({
+							url: authUrl,
+							form: tokenParams,
+							json: true
+						}, function (err, res, body) {
+							if (err) {
+								return callback(err);
+							}
+							if (res.statusCode === 200) {
+								self.log.debug('New tokens received.');
+								self._setTokens(body);
+								self._request(segments, method, callback, query, payload, data, headers, pipe, config);
+							} else {
+								callback(new Error(JSON.stringify(body)));
+							}
+						});
+					} else {
+						self.ready(function () {
+							self._request(segments, method, callback, query, payload, data, headers, pipe, config);
+						});
+					}
 					break;
 
 				case 302:
@@ -418,10 +455,11 @@ var Connection = base.createChild().addInstanceMethods(
 
 		/**
 		 * Wait for a connection to get ready.
-		 * @param {optionalErrorCallback} callback - The callback with an optional err argument, to be invoked once ready.
+		 * @param {optionalErrorCallback} callback - The callback with an optional err argument,
+		 * to be invoked once ready.
 		 */
 		ready: function (callback) {
-			if (this.access_token) {
+			if (this.isAuthenticated()) {
 				callback();
 			} else {
 				this.once('tokens.*', callback);
@@ -480,7 +518,7 @@ module.exports = Connection;</pre>
 					
 		<span class="jsdoc-message">
 		Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a>
-		on Wed Apr 30 2014 17:25:01 GMT+0530 (IST) using the <a href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
+		on Tue May 06 2014 09:12:54 GMT+0530 (IST) using the <a href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
 		</span>
 				</footer>
 			</div>

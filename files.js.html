@@ -159,13 +159,14 @@ module.exports = function (Connection) {
        * @param {number} id - The file's ID.
        * @param {requestCallback} done - The callback to invoke (with possible errors) when the request returns.
        * @param {RequestHeaders} [headers] - Additional headers.
+       * @param {?RequestConfig} [config] - Configure the request behaviour.
        */
-      getFileInfo: function (id, done, headers) {
+      getFileInfo: function (id, done, headers, config) {
         if (!_.isNumber(parseInt(id, 10))) {
           return done(new Error('id must be specified.'));
         }
 
-        this._request(['files', id], 'GET', done, null, null, null, headers);
+        this._request(['files', id], 'GET', done, null, null, null, headers, null, config);
       },
 
       /**
@@ -183,8 +184,9 @@ module.exports = function (Connection) {
        * @param {number} version - File version to download. Can be null (meaning get the latest).
        * @param {string} dest - Full path to where the file should be saved.
        * @param {getFileCallback} done - The callback to invoke (with possible errors) when the request returns.
+       * @param {?RequestConfig} [config] - Configure the request behaviour.
        */
-      getFile: function (id, version, dest, done) {
+      getFile: function (id, version, dest, done, config) {
         if (!_.isNumber(parseInt(id, 10))) {
           return done(new Error('id must be specified.'));
         }
@@ -217,7 +219,7 @@ module.exports = function (Connection) {
             done(err);
             cbCalled = true;
           }
-        }, opts, null, null, null, wr);
+        }, opts, null, null, null, wr, config);
       },
 
       /**
@@ -237,8 +239,9 @@ module.exports = function (Connection) {
        * @param {external:FieldsUpdateFile} fields - The fields to update.
        * @param {requestCallback} done - The callback to invoke (with possible errors) when the request returns.
        * @param {RequestHeaders} [headers] - Additional headers.
+       * @param {?RequestConfig} [config] - Configure the request behaviour.
        */
-      updateFile: function (id, fields, done, headers) {
+      updateFile: function (id, fields, done, headers, config) {
         if (!_.isNumber(parseInt(id, 10))) {
           return done(new Error('id must be specified.'));
         }
@@ -246,7 +249,7 @@ module.exports = function (Connection) {
           return done(new Error('An fields object must be provided.'));
         }
 
-        this._request(['files', id], 'PUT', done, null, fields, null, headers);
+        this._request(['files', id], 'PUT', done, null, fields, null, headers, null, config);
       },
 
       /**
@@ -269,8 +272,9 @@ module.exports = function (Connection) {
        * @param {number} parent_id - The parent folder's ID.
        * @param {?OptsUploadFile} opts - Request options.
        * @param {requestCallback} done - The callback to invoke (with possible errors) when the request returns.
+       * @param {?RequestConfig} [config] - Configure the request behaviour.
        */
-      uploadFile: function (name, parent_id, opts, done) {
+      uploadFile: function (name, parent_id, opts, done, config) {
         if (!_.isString(name) || !_.isNumber(parseInt(parent_id, 10))) {
           return done(new Error('Invalid params. Required - name: string, parent_id: number'));
         }
@@ -279,7 +283,7 @@ module.exports = function (Connection) {
         opts.parent_id = parent_id;
 
         var data = fs.createReadStream(name);
-        this._request(['files', 'content'], 'POST', done, null, opts, data);
+        this._request(['files', 'content'], 'POST', done, null, opts, data, null, null, config);
       },
 
       /**
@@ -290,13 +294,14 @@ module.exports = function (Connection) {
        * @param {number} id - The file's ID.
        * @param {requestCallback} done - The callback to invoke (with possible errors) when the request returns.
        * @param {RequestHeaders} [headers] - Additional headers.
+       * @param {?RequestConfig} [config] - Configure the request behaviour.
        */
-      deleteFile: function (id, done, headers) {
+      deleteFile: function (id, done, headers, config) {
         if (!_.isNumber(parseInt(id, 10))) {
           return done(new Error('id must be specified.'));
         }
 
-        this._request(['files', id], 'DELETE', done, null, null, null, headers);
+        this._request(['files', id], 'DELETE', done, null, null, null, headers, null, config);
       },
 
       /**
@@ -318,14 +323,15 @@ module.exports = function (Connection) {
        * @param {?OptsUploadFileNewVersion} opts - Request options.
        * @param {requestCallback} done - The callback to invoke (with possible errors) when the request returns.
        * @param {RequestHeaders} [headers] - Additional headers.
+       * @param {?RequestConfig} [config] - Configure the request behaviour.
        */
-      uploadFileNewVersion: function (name, id, opts, done, headers) {
+      uploadFileNewVersion: function (name, id, opts, done, headers, config) {
         if (!_.isString(name) || !_.isNumber(parseInt(id, 10))) {
           return done(new Error('Invalid params. Required - name: string, id: number'));
         }
 
         var data = fs.createReadStream(name);
-        this._request(['files', id, 'content'], 'POST', done, null, opts, data, headers);
+        this._request(['files', id, 'content'], 'POST', done, null, opts, data, headers, null, config);
       },
 
       /**
@@ -335,13 +341,14 @@ module.exports = function (Connection) {
        * @see {@link https://developers.box.com/docs/#files-view-versions-of-a-file}
        * @param {number} id - The file's ID.
        * @param {requestCallback} done - The callback to invoke (with possible errors) when the request returns.
+       * @param {?RequestConfig} [config] - Configure the request behaviour.
        */
-      getFileVersions: function (id, done) {
+      getFileVersions: function (id, done, config) {
         if (!_.isNumber(parseInt(id, 10))) {
           return done(new Error('id must be specified.'));
         }
 
-        this._request(['files', id, 'versions'], 'GET', done);
+        this._request(['files', id, 'versions'], 'GET', done, null, null, null, null, null, config);
       },
 
       /**
@@ -355,8 +362,9 @@ module.exports = function (Connection) {
        * @param {number} id - The file's ID.
        * @param {number} version - File version to promote.
        * @param {requestCallback} done - The callback to invoke (with possible errors) when the request returns.
+       * @param {?RequestConfig} [config] - Configure the request behaviour.
        */
-      promoteFileVersion: function (id, version, done) {
+      promoteFileVersion: function (id, version, done, config) {
         if (!_.isNumber(parseInt(id, 10))) {
           return done(new Error('id must be specified.'));
         }
@@ -368,7 +376,7 @@ module.exports = function (Connection) {
           type: 'file_version',
           id: version
         };
-        this._request(['files', id, 'versions', 'current'], 'POST', done, null, payload);
+        this._request(['files', id, 'versions', 'current'], 'POST', done, null, payload, null, null, null, config);
       },
 
       /**
@@ -379,8 +387,9 @@ module.exports = function (Connection) {
        * @param {number} version - File version to promote.
        * @param {requestCallback} done - The callback to invoke (with possible errors) when the request returns.
        * @param {RequestHeaders} [headers] - Additional headers.
+       * @param {?RequestConfig} [config] - Configure the request behaviour.
        */
-      deleteFileVersion: function (id, version, done, headers) {
+      deleteFileVersion: function (id, version, done, headers, config) {
         if (!_.isNumber(parseInt(id, 10))) {
           return done(new Error('id must be specified.'));
         }
@@ -388,7 +397,7 @@ module.exports = function (Connection) {
           return done(new Error('version must be a number.'));
         }
 
-        this._request(['files', id, 'versions', version], 'DELETE', done, null, null, null, headers);
+        this._request(['files', id, 'versions', version], 'DELETE', done, null, null, null, headers, null, config);
       },
 
       /**
@@ -400,8 +409,9 @@ module.exports = function (Connection) {
        * @param {number} parent_id - The destination parent folder's ID.
        * @param {string} name - The destination file's name. Can be null.
        * @param {requestCallback} done - The callback to invoke (with possible errors) when the request returns.
+       * @param {?RequestConfig} [config] - Configure the request behaviour.
        */
-      copyFile: function (id, parent_id, name, done, headers) {
+      copyFile: function (id, parent_id, name, done, config) {
         if (!_.isNumber(parseInt(id, 10)) || !_.isNumber(parseInt(parent_id, 10))) {
           return done(new Error('Invalid params. Required - id: number, parent_id: number'));
         }
@@ -415,7 +425,7 @@ module.exports = function (Connection) {
           opts.name = name;
         }
 
-        this._request(['files', id, 'copy'], 'POST', done, null, opts);
+        this._request(['files', id, 'copy'], 'POST', done, null, opts, null, null, null, config);
       },
 
       /**
@@ -434,8 +444,9 @@ module.exports = function (Connection) {
        * @param {external:OptsGetFileThumbnail} opts - Thumbnail options.
        * @param {string} dest - Full path to where the file should be saved.
        * @param {getFileCallback} done - The callback to invoke (with possible errors) when the request returns.
+       * @param {?RequestConfig} [config] - Configure the request behaviour.
        */
-      getFileThumbnail: function (id, opts, dest, done) {
+      getFileThumbnail: function (id, opts, dest, done, config) {
         if (!_.isNumber(parseInt(id, 10))) {
           return done(new Error('id must be specified.'));
         }
@@ -460,7 +471,7 @@ module.exports = function (Connection) {
             done(err);
             cbCalled = true;
           }
-        }, opts, null, null, null, wr);
+        }, opts, null, null, null, wr, config);
       },
 
       /**
@@ -469,12 +480,13 @@ module.exports = function (Connection) {
        * @see {@link https://developers.box.com/docs/#files-get-a-trashed-file}
        * @param {number} id - The folder's ID.
        * @param {requestCallback} done - The callback to invoke (with possible errors) when the request returns.
+       * @param {?RequestConfig} [config] - Configure the request behaviour.
        */
-      getTrashedFile: function (id, done) {
+      getTrashedFile: function (id, done, config) {
         if (!_.isNumber(parseInt(id, 10))) {
           return done(new Error('id must be specified.'));
         }
-        this._request(['files', id, 'trash'], 'GET', done);
+        this._request(['files', id, 'trash'], 'GET', done, null, null, null, null, null, config);
       },
 
       /**
@@ -484,12 +496,13 @@ module.exports = function (Connection) {
        * @see {@link https://developers.box.com/docs/#files-permanently-delete-a-trashed-file}
        * @param {number} id - The folder's ID.
        * @param {requestCallback} done - The callback to invoke (with possible errors) when the request returns.
+       * @param {?RequestConfig} [config] - Configure the request behaviour.
        */
-      deleteTrashedFile: function (id, done) {
+      deleteTrashedFile: function (id, done, config) {
         if (!_.isNumber(parseInt(id, 10))) {
           return done(new Error('id must be specified.'));
         }
-        this._request(['files', id, 'trash'], 'DELETE', done);
+        this._request(['files', id, 'trash'], 'DELETE', done, null, null, null, null, null, config);
       },
 
       /**
@@ -503,8 +516,9 @@ module.exports = function (Connection) {
        * @param {?string} name - The file's name.
        * @param {number} parent_id - The parent folder's ID. Can be null.
        * @param {requestCallback} done - The callback to invoke (with possible errors) when the request returns.
+       * @param {?RequestConfig} [config] - Configure the request behaviour.
        */
-      restoreTrashedFile: function (id, name, parent_id, done) {
+      restoreTrashedFile: function (id, name, parent_id, done, config) {
         if ((name && !_.isString(name)) || (parent_id && !_.isNumber(parseInt(parent_id, 10)))) {
           return done(new Error('Invalid params. Required - name: string, parent_id: number'));
         }
@@ -519,7 +533,7 @@ module.exports = function (Connection) {
           };
         }
 
-        this._request(['files', id], 'POST', done, null, opts);
+        this._request(['files', id], 'POST', done, null, opts, null, null, null, config);
       },
 
       /**
@@ -528,13 +542,14 @@ module.exports = function (Connection) {
        * @see {@link https://developers.box.com/docs/#files-view-the-comments-on-a-file}
        * @param {number} id - The file's ID.
        * @param {requestCallback} done - The callback to invoke (with possible errors) when the request returns.
+       * @param {?RequestConfig} [config] - Configure the request behaviour.
        */
-      getFileComments: function (id, done) {
+      getFileComments: function (id, done, config) {
         if (!_.isNumber(parseInt(id, 10))) {
           return done(new Error('id must be specified.'));
         }
 
-        this._request(['files', id, 'comments'], 'GET', done);
+        this._request(['files', id, 'comments'], 'GET', done, null, null, null, null, null, config);
       },
 
       /**
@@ -543,13 +558,14 @@ module.exports = function (Connection) {
        * @see {@link https://developers.box.com/docs/#files-get-the-tasks-for-a-file}
        * @param {number} id - The file's ID.
        * @param {requestCallback} done - The callback to invoke (with possible errors) when the request returns.
+       * @param {?RequestConfig} [config] - Configure the request behaviour.
        */
-      getFileTasks: function (id, done) {
+      getFileTasks: function (id, done, config) {
         if (!_.isNumber(parseInt(id, 10))) {
           return done(new Error('id must be specified.'));
         }
 
-        this._request(['files', id, 'tasks'], 'GET', done);
+        this._request(['files', id, 'tasks'], 'GET', done, null, null, null, null, null, config);
       }
     });
 };</pre>
@@ -573,7 +589,7 @@ module.exports = function (Connection) {
 					
 		<span class="jsdoc-message">
 		Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a>
-		on Wed Apr 30 2014 17:25:01 GMT+0530 (IST) using the <a href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
+		on Tue May 06 2014 09:12:54 GMT+0530 (IST) using the <a href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
 		</span>
 				</footer>
 			</div>
