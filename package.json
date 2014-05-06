@@ -1,7 +1,7 @@
 {
   "name": "box-sdk",
   "description": "Node.js client for Box Content API",
-  "version": "0.0.0-b1",
+  "version": "0.0.0-b2",
   "homepage": "https://github.com/adityamukho/node-box-sdk",
   "author": {
     "name": "Aditya Mukhopadhyay",
@@ -36,6 +36,7 @@
     "grunt-contrib-watch": "~0.5.3",
     "grunt-jsdoc": "^0.5.4",
     "grunt-mocha-test": "^0.10.2",
+    "image-size": "^0.2.3",
     "mkdirp": "^0.4.0",
     "passport": "0.2.0",
     "passport-box": "0.1.0",

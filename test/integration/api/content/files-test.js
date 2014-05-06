@@ -2,6 +2,7 @@
 
 var assert = require("assert"),
   utils = require('../../../helpers/utils'),
+  sizeOf = require('image-size'),
   box_sdk = require('../../../..');
 
 describe('Connection', function () {
@@ -107,7 +108,16 @@ describe('Connection', function () {
       });
     });
 
-    it('should return the file\'s versions');
+    it('should return the file\'s versions', function (done) {
+      utils.prepSampleFile(connection, test_nbsdk_id, function (result) {
+        connection.getFileVersions(result.entries[0].id, function (err, result) {
+          assert.ifError(err);
+          assert(result.entries instanceof Array);
+          done();
+        });
+      });
+    });
+
     it('should return an old version of the file');
     it('should promote an older version of the file');
     it('should delete an older version of the file');
@@ -123,10 +133,81 @@ describe('Connection', function () {
       });
     });
 
-    it('should download a thumbnail of the file');
-    it('should return a trashed file');
-    it('should permanently delete a trashed file');
-    it('should restore a trashed file');
+    it('should download a thumbnail of the file', function (done) {
+      connection.createFolder(utils.uuid(), test_nbsdk_id, function (err, result) {
+        assert.ifError(err);
+
+        var imgFile = 'test/samples/banana.png';
+        utils.shasum(imgFile, function (d) {
+          var headers = {
+            'Content-MD5': d
+          };
+
+          connection.uploadFile(imgFile, result.id, null, function (err, result) {
+            assert.ifError(err);
+
+            var dest = 'test/.tmp/testfile-' + utils.uuid() + '.png';
+            connection.getFileThumbnail(result.entries[0].id, {
+              min_height: 32,
+              min_width: 32
+            }, dest, function (err) {
+              assert.ifError(err);
+
+              sizeOf(dest, function (err, dimensions) {
+                assert.ifError(err);
+                assert.equal(dimensions.width, 32);
+                assert.equal(dimensions.height, 32);
+
+                done();
+              });
+            });
+          }, headers);
+        });
+      });
+    });
+
+    it('should restore a trashed file', function (done) {
+      utils.prepSampleFile(connection, test_nbsdk_id, function (result) {
+        var fid = result.entries[0].id;
+        connection.deleteFile(fid, function (err) {
+          assert.ifError(err);
+          connection.restoreTrashedFile(fid, null, null, function (err, result) {
+            assert.ifError(err);
+            assert.equal(result.type, 'file');
+            assert.equal(result.id, fid);
+            done();
+          });
+        });
+      });
+    });
+
+    it('should permanently delete a trashed file', function (done) {
+      utils.prepSampleFile(connection, test_nbsdk_id, function (result) {
+        var fid = result.entries[0].id;
+        connection.deleteFile(fid, function (err) {
+          assert.ifError(err);
+          connection.deleteTrashedFile(fid, function (err) {
+            assert.ifError(err);
+            done();
+          });
+        });
+      });
+    });
+
+    it('should return a trashed file', function (done) {
+      utils.prepSampleFile(connection, test_nbsdk_id, function (result) {
+        var fid = result.entries[0].id;
+        connection.deleteFile(fid, function (err) {
+          assert.ifError(err);
+          connection.getTrashedFile(fid, function (err, result) {
+            assert.ifError(err);
+            assert.equal(result.type, 'file');
+            assert.equal(result.id, fid);
+            done();
+          });
+        });
+      });
+    });
 
     it('should return a file\'s comments', function (done) {
       utils.prepSampleFile(connection, test_nbsdk_id, function (result) {
