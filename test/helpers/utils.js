@@ -99,7 +99,7 @@ exports.cleanup = function (connection, test_nbsdk_id) {
       }
     });
   }
-  // rimraf.sync('test/.tmp');
+  rimraf.sync('test/.tmp');
 };
 
 exports.copyFile = function (source, target, cb) {
