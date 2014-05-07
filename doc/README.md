@@ -3,7 +3,7 @@ https://github.com/adityamukho/node-box-sdk
 
 Node.js client for the [Box.com Content API](https://developers.box.com/docs/).
 
-**This is an alpha release. Although the included integration tests do offer a good deal of assurance about its usability, it has not been adequately battle-tested yet.**
+**This is now a beta release. Tests include the bundled integration tests, and a CLI application (under construction) that relies on this SDK.**
 
 ## Supported Features
 * All File Ops
@@ -110,7 +110,8 @@ connection.ready(function () {
   //Conquer the universe, etc
   ...
 
-  connection.stopLongPolling();
+  //In some block later...
+  //connection.stopLongPolling();
 };
 ```
 

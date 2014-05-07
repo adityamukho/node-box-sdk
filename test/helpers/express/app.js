@@ -2,6 +2,11 @@
 
 var express = require('express'),
   passport = require('passport'),
+  morgan = require('morgan'),
+  bodyParser = require('body-parser'),
+  cookieParser = require('cookie-parser'),
+  session = require('express-session'),
+  methodOverride = require('method-override'),
   BoxStrategy = require('passport-box').Strategy,
   box_sdk = require('../../..');
 
@@ -25,23 +30,22 @@ passport.use(new BoxStrategy({
 }, box.authenticate()));
 
 var app = express();
+var router = express.Router();
 
 // configure Express
-app.configure(function () {
-  app.set('views', __dirname + '/views');
-  app.set('view engine', 'ejs');
-  app.use(express.logger());
-  app.use(express.cookieParser());
-  app.use(express.bodyParser());
-  app.use(express.methodOverride());
-  app.use(express.session({
-    secret: 'keyboard cat'
-  }));
-  app.use(passport.initialize());
-  app.use(passport.session());
-  app.use(app.router);
-  app.use(express.static(__dirname + '/public'));
-});
+app.set('views', __dirname + '/views');
+app.set('view engine', 'ejs');
+app.use(morgan());
+app.use(cookieParser());
+app.use(bodyParser());
+app.use(methodOverride());
+app.use(session({
+  secret: 'keyboard cat'
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(router);
+// app.use(express.static(__dirname + '/public'));
 
 app.get('/', function (req, res) {
   res.render('index', {
