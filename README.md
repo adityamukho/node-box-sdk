@@ -111,7 +111,8 @@ connection.ready(function () {
   //Conquer the universe, etc
   ...
 
-  connection.stopLongPolling();
+  //In some block later...
+  //connection.stopLongPolling();
 };
 ```
 
