@@ -14,7 +14,7 @@ var BOX_CLIENT_ID = process.env.ICT_CLIENT_ID;
 var BOX_CLIENT_SECRET = process.env.ICT_CLIENT_SECRET;
 var PORT = parseInt(process.env.ICT_PORT, 10);
 
-var box = box_sdk.Box('debug');
+var box = box_sdk.Box(null, 'debug');
 
 passport.serializeUser(function (user, done) {
   done(null, user);
