@@ -12,12 +12,11 @@ describe('Connection', function () {
         client_id: process.env.ICT_CLIENT_ID,
         client_secret: process.env.ICT_CLIENT_SECRET,
         port: PORT,
-        'log-level': 'debug'
       },
       box, connection, test_nbsdk_id;
 
     before(function (done) {
-      box = box_sdk.Box(opts);
+      box = box_sdk.Box(opts, 'debug');
       connection = box.getConnection(process.env.ICT_EMAIL_ID);
 
       utils.prepTestFolder(connection, function (err, tid) {

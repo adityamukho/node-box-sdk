@@ -15,7 +15,7 @@ describe('Connection', function () {
       box, connection;
 
     before(function () {
-      box = box_sdk.Box(opts);
+      box = box_sdk.Box(opts, 'debug');
       connection = box.getConnection(process.env.ICT_EMAIL_ID);
     });
 

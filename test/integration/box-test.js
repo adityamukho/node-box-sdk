@@ -15,13 +15,12 @@ describe('Box', function () {
         client_id: process.env.ICT_CLIENT_ID,
         client_secret: process.env.ICT_CLIENT_SECRET,
         port: PORT,
-        'log-level': 'debug'
       };
     });
 
     it('should return a Box instance', function () {
       assert.doesNotThrow(function () {
-        box = box_sdk.Box(opts);
+        box = box_sdk.Box(opts, 'debug');
       });
 
       assert(box instanceof box_sdk.Box);
