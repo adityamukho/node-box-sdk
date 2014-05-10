@@ -4,12 +4,11 @@
 
 Node.js client for the [Box.com Content API](https://developers.box.com/docs/).
 
-**This is now a beta release. Tests include the bundled integration tests, and a CLI application (under construction) that relies on this SDK.**
-
 ## Supported Features
 * All File Ops
 * All Folder Ops
 * Events - Long Polling
+* Search
 
 The SDK aims to abstract away the intricacies of authentication, refreshing tokens, etc. as far as possible. Hence, you will not find explicit methods to perform low-level operations.
 
@@ -23,14 +22,15 @@ Install the module with: `npm install box-sdk`
 ```javascript
 var box_sdk = require('box-sdk');
 
+var logLevel = 'debug'; //default log level on construction is info
+
 //Default host: localhost
 var box = box_sdk.Box({
   client_id: 'client id',
   client_secret: 'client secret',
   port: 9999,
-  host: 'somehost', //default localhost
-  log-level: 'debug' //default info
-});
+  host: 'somehost' //default localhost
+}, logLevel);
 var connection = box.getConnection('some.email@example.com');
 
 //Navigate user to the auth URL

@@ -29,8 +29,7 @@ describe('Connection', function () {
 
     it('should return search results', function (done) {
       utils.prepSampleFile(connection, test_nbsdk_id, function (result) {
-        var fname = result.entries[0].name,
-          fid = result.entries[0].id;
+        var fname = result.entries[0].name;
         connection.search(fname, null, function (err, result) {
           assert.ifError(err);
           assert(result.entries instanceof Array);
