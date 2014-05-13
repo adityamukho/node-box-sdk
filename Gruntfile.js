@@ -11,7 +11,7 @@ module.exports = function (grunt) {
         options: {
           reporter: 'spec',
           timeout: '60s',
-          slow: '10s',
+          slow: '20s',
           require: [
 
             function () {

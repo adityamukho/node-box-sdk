@@ -11,7 +11,9 @@ casper.start(casper.cli.args[0], function () {
 });
 
 casper.then(function () {
-  this.fillSelectors('form[name="consent_form"]', {}, true);
+  this.waitForSelector('form[name="consent_form"]', function () {
+    this.fillSelectors('form[name="consent_form"]', {}, true);
+  });
 });
 
 casper.then(function () {
