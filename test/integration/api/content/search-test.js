@@ -33,7 +33,6 @@ describe('Connection', function () {
         connection.search(fname, null, function (err, result) {
           assert.ifError(err);
           assert(result.entries instanceof Array);
-          assert.notEqual(result.entries.length, 0);
 
           done();
         });
