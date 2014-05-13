@@ -29,28 +29,17 @@ exports.uuid = function () {
 };
 
 exports.prepTestFolder = function (connection, done) {
+  var self = this;
   var args = [connection.getAuthURL(), process.env.ICT_EMAIL_ID, process.env.ICT_PASSWORD];
 
   this.runHeadlessClient(args, function () {
     connection.ready(function (err) {
       assert.ifError(err);
-      connection.getFolderItems(0, null, function (err, result) {
+      connection.createFolder('test_nbsdk-' + self.uuid(), 0, function (err, result) {
         if (err) {
           return done(err);
         }
-        var test_nbsdk = _.find(result.entries, {
-          name: 'test_nbsdk'
-        });
-        if (_.isEmpty(test_nbsdk)) {
-          connection.createFolder('test_nbsdk', 0, function (err, result) {
-            if (err) {
-              return done(err);
-            }
-            done(null, result.id);
-          });
-        } else {
-          done(null, test_nbsdk.id);
-        }
+        done(null, result.id);
       });
     });
   });

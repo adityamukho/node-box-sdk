@@ -2,6 +2,7 @@
 /*global document */
 
 var casper = require('casper').create();
+casper.options.waitTimeout = 20000;
 
 casper.start(casper.cli.args[0], function () {
   this.fillSelectors('form[name="login_form"]', {
