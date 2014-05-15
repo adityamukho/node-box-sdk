@@ -1,7 +1,6 @@
 'use strict';
 
 var assert = require("assert"),
-  _ = require('lodash'),
   cp = require('child_process'),
   crypto = require('crypto'),
   mkdirp = require('mkdirp'),
