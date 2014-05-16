@@ -46,7 +46,7 @@ connection.ready(function () {
 ```
 
 ### Running with Passport authentication under Express
-**Note:** For a complete express example, look under `test/helpers/express`.
+**Note:** There is a complete express example in [this gist](https://gist.github.com/adityamukho/13c7c462e216fa02d0a9).
 ```
 var express = require('express'),
   passport = require('passport'),
@@ -80,6 +80,27 @@ app.get('/auth/box/callback',
   function (req, res) {
     res.redirect('/');
   });
+
+app.get('/', function (req, res) {
+  var opts = {
+    user: req.user
+  };
+  if (req.user) {
+    var connection = box.getConnection(req.user.login);
+    connection.ready(function () {
+      connection.getFolderItems(0, null, function (err, result) {
+        if (err) {
+          opts.body = err;
+        } else {
+          opts.body = result;
+        }
+        res.render('index', opts);
+      });
+    });
+  } else {
+    res.render('index', opts);
+  }
+});
 ```
 
 ### Long Polling
