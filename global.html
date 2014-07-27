@@ -113,6 +113,10 @@
 						</li>
 						
 						<li>
+							<a href="external-ISO8601.html">ISO8601</a>
+						</li>
+						
+						<li>
 							<a href="external-Monologue.html">Monologue</a>
 						</li>
 						
@@ -937,6 +941,467 @@ Defaults to <code>localhost</code>.</td>
     
     
     
+    
+    
+</dd>
+
+            
+                
+<dt>
+    <h4 class="name" id="OptsSearch">OptsSearch</h4>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        Options and parameters for search.
+    </div>
+    
+    
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Object</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+
+        <h5 class="subsection-title">Properties:</h5>
+
+        <dl>
+
+<table class="props table table-striped">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+		<th>Argument</th>
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name"><code>scope</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">The scope for which you want to limit your search to. Can be
+<code>user_content</code> for a search limited to only the current user or <code>enterprise_content</code>
+for the entire enterprise.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>file_extensions</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Limit searches to specific file extensions like
+<code>pdf,png,doc</code>. Requires one or a set of comma delimited file extensions.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>created_at_range</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="external-ISO8601.html">external:ISO8601</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">The date for when the item was created. Specify the date
+range by using ISO-8601 variables separated by a comma: <code>from_date,to_date</code>. Trailing
+<code>from_date,</code> and leading <code>commas</code> are also accepted, where the current date
+and earliest known date will be designated respectively.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>updated_at_range</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="external-ISO8601.html">external:ISO8601</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">The date for when the item was updated. Specify the date
+range by using ISO-8601 variables separated by a comma: <code>from_date,to_date</code>. Trailing
+<code>from_date,</code> and leading <code>commas</code> are also accepted, where the current date
+and earliest known date will be designated respectively.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>size_range</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Filter by a file size range. Specify the file size range in bytes
+separated by a comma: <code>lower_bound_size,upper_bound_size</code>, where 1MB is equivalent to 1000000
+bytes. Trailing <code>lower_bound_size,</code> and leading <code>,upper_bound_size</code> commas are also
+accepted as parameters.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>owner_user_ids</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Search by item owners. Requires one or a set of comma delimited
+user_ids.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>ancestor_folder_ids</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Limit searches to specific parent folders. Requires one or a
+set of comma delimited folder_ids: <code>folder_id_1,folder_id_2,...</code>. Parent folder results will
+also include items within subfolders.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>content_types</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Limit searches to specific Box designated content types. Can be
+<code>name</code>, <code>description</code>, <code>file_content</code>, <code>comments</code>, or
+<code>tags</code>. Requires one or a set of comma delimited content_types.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>type</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">The type you want to return in your search. Can be <code>file</code>,
+<code>folder</code>, or <code>web_link</code>.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>limit</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Number of search results to return. Default: 30, Max :200.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>offset</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">The search result at which to start the response. Default: 0.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+</dl>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="search.js.html">api/content/search.js</a>, <a href="search.js.html#sunlight-1-line-11">line 11</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://developers.box.com/docs/#search">https://developers.box.com/docs/#search</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
     
     
 </dd>
@@ -1859,7 +2324,7 @@ Defaults to <code>1000</code>.</td>
 					
 		<span class="jsdoc-message">
 		Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a>
-		on Sun Jul 13 2014 19:51:57 GMT+0530 (IST) using the <a href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
+		on Sun Jul 27 2014 08:27:52 GMT+0530 (IST) using the <a href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
 		</span>
 				</footer>
 			</div>
