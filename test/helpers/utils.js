@@ -8,6 +8,7 @@ var assert = require("assert"),
   fs = require('fs');
 
 exports.runHeadlessClient = function (args, done) {
+  args.unshift('--ssl-protocol=tlsv1');
   args.unshift('test/helpers/casper/login.js');
   var casper = cp.spawn('casperjs', args, {
     detached: false,
