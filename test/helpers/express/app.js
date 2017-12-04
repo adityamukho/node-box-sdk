@@ -37,10 +37,12 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.use(morgan());
 app.use(cookieParser());
-app.use(bodyParser());
+app.use(bodyParser.json());
 app.use(methodOverride());
 app.use(session({
-  secret: 'keyboard cat'
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: false
 }));
 app.use(passport.initialize());
 app.use(passport.session());
