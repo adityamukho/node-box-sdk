@@ -36,7 +36,7 @@
     "express-session": "1.15.6",
     "grunt": "~0.4.2",
     "grunt-contrib-jshint": "~0.6.4",
-    "grunt-contrib-watch": "~0.5.3",
+    "grunt-contrib-watch": "~1.0.0",
     "grunt-jsdoc": "^2.2.0",
     "grunt-mocha-test": "^0.10.2",
     "image-size": "^0.2.3",
@@ -55,12 +55,11 @@
   "dependencies": {
     "async": "^0.7.0",
     "base-framework": "^1.0.1",
-    "form-data": "^0.1.2",
     "lodash": "^2.4.1",
     "log": "^1.4.0",
     "monologue.js": "^0.1.4",
     "nedb": "^0.10.5",
-    "request": "2.34.0",
+    "request": "2.83.0",
     "router": "^0.6.2"
   }
 }
