@@ -21,9 +21,9 @@
       }
     },
     "ajv": {
-      "version": "5.5.1",
-      "resolved": "https://registry.npmjs.org/ajv/-/ajv-5.5.1.tgz",
-      "integrity": "sha1-s4u4h22ehr7plJVqBOch6IskjrI=",
+      "version": "5.5.2",
+      "resolved": "https://registry.npmjs.org/ajv/-/ajv-5.5.2.tgz",
+      "integrity": "sha1-c7Xuyj+rZT49P5Qis0GtQiBdyWU=",
       "requires": {
         "co": "4.6.0",
         "fast-deep-equal": "1.0.0",
@@ -857,6 +857,51 @@
       "requires": {
         "cross-spawn": "3.0.1",
         "jsdoc": "3.5.5"
+      },
+      "dependencies": {
+        "jsdoc": {
+          "version": "3.5.5",
+          "resolved": "https://registry.npmjs.org/jsdoc/-/jsdoc-3.5.5.tgz",
+          "integrity": "sha512-6PxB65TAU4WO0Wzyr/4/YhlGovXl0EVYfpKbpSroSj0qBxT4/xod/l40Opkm38dRHRdQgdeY836M0uVnJQG7kg==",
+          "dev": true,
+          "requires": {
+            "babylon": "7.0.0-beta.19",
+            "bluebird": "3.5.1",
+            "catharsis": "0.8.9",
+            "escape-string-regexp": "1.0.5",
+            "js2xmlparser": "3.0.0",
+            "klaw": "2.0.0",
+            "marked": "0.3.9",
+            "mkdirp": "0.5.1",
+            "requizzle": "0.2.1",
+            "strip-json-comments": "2.0.1",
+            "taffydb": "2.6.2",
+            "underscore": "1.8.3"
+          },
+          "dependencies": {
+            "marked": {
+              "version": "0.3.9",
+              "resolved": "https://registry.npmjs.org/marked/-/marked-0.3.9.tgz",
+              "integrity": "sha512-nW5u0dxpXxHfkHzzrveY45gCbi+R4PaO4WRZYqZNl+vB0hVGeqlFn0aOg1c8AKL63TrNFn9Bm2UP4AdiZ9TPLw==",
+              "dev": true
+            }
+          }
+        },
+        "mkdirp": {
+          "version": "0.5.1",
+          "resolved": "https://registry.npmjs.org/mkdirp/-/mkdirp-0.5.1.tgz",
+          "integrity": "sha1-MAV0OOrGz3+MR2fzhkjWaX11yQM=",
+          "dev": true,
+          "requires": {
+            "minimist": "0.0.8"
+          }
+        },
+        "underscore": {
+          "version": "1.8.3",
+          "resolved": "https://registry.npmjs.org/underscore/-/underscore-1.8.3.tgz",
+          "integrity": "sha1-Tz+1OxBuYJf8+ctBCfKl6b36UCI=",
+          "dev": true
+        }
       }
     },
     "grunt-legacy-log": {
@@ -949,7 +994,7 @@
       "resolved": "https://registry.npmjs.org/har-validator/-/har-validator-5.0.3.tgz",
       "integrity": "sha1-ukAsJmGU8VlW7xXg/PJCmT9qff0=",
       "requires": {
-        "ajv": "5.5.1",
+        "ajv": "5.5.2",
         "har-schema": "2.0.0"
       }
     },
@@ -1102,43 +1147,6 @@
       "integrity": "sha1-peZUwuWi3rXyAdls77yoDA7y9RM=",
       "optional": true
     },
-    "jsdoc": {
-      "version": "3.5.5",
-      "resolved": "https://registry.npmjs.org/jsdoc/-/jsdoc-3.5.5.tgz",
-      "integrity": "sha512-6PxB65TAU4WO0Wzyr/4/YhlGovXl0EVYfpKbpSroSj0qBxT4/xod/l40Opkm38dRHRdQgdeY836M0uVnJQG7kg==",
-      "dev": true,
-      "requires": {
-        "babylon": "7.0.0-beta.19",
-        "bluebird": "3.5.1",
-        "catharsis": "0.8.9",
-        "escape-string-regexp": "1.0.5",
-        "js2xmlparser": "3.0.0",
-        "klaw": "2.0.0",
-        "marked": "0.3.7",
-        "mkdirp": "0.5.1",
-        "requizzle": "0.2.1",
-        "strip-json-comments": "2.0.1",
-        "taffydb": "2.6.2",
-        "underscore": "1.8.3"
-      },
-      "dependencies": {
-        "mkdirp": {
-          "version": "0.5.1",
-          "resolved": "https://registry.npmjs.org/mkdirp/-/mkdirp-0.5.1.tgz",
-          "integrity": "sha1-MAV0OOrGz3+MR2fzhkjWaX11yQM=",
-          "dev": true,
-          "requires": {
-            "minimist": "0.0.8"
-          }
-        },
-        "underscore": {
-          "version": "1.8.3",
-          "resolved": "https://registry.npmjs.org/underscore/-/underscore-1.8.3.tgz",
-          "integrity": "sha1-Tz+1OxBuYJf8+ctBCfKl6b36UCI=",
-          "dev": true
-        }
-      }
-    },
     "jshint": {
       "version": "2.1.11",
       "resolved": "https://registry.npmjs.org/jshint/-/jshint-2.1.11.tgz",
@@ -1229,12 +1237,6 @@
       "version": "2.7.3",
       "resolved": "https://registry.npmjs.org/lru-cache/-/lru-cache-2.7.3.tgz",
       "integrity": "sha1-bUUk6LlV+V1PW1iFHOId1y+06VI=",
-      "dev": true
-    },
-    "marked": {
-      "version": "0.3.7",
-      "resolved": "https://registry.npmjs.org/marked/-/marked-0.3.7.tgz",
-      "integrity": "sha512-zBEP4qO1YQp5aXHt8S5wTiOv9i2X74V/LQL0zhUNvVaklt6Ywa6lChxIvS+ibYlCGgADwKwZFhjC3+XfpsvQvQ==",
       "dev": true
     },
     "media-typer": {
