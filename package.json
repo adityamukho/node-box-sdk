@@ -55,7 +55,7 @@
   "dependencies": {
     "async": "^0.7.0",
     "base-framework": "^1.0.1",
-    "lodash": "^2.4.1",
+    "lodash": ">=4.17.5",
     "log": "^1.4.0",
     "monologue.js": "^0.1.4",
     "nedb": "^0.10.5",
