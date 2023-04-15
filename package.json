@@ -34,7 +34,7 @@
     "ejs": "~2.5.5",
     "express": "4.16.2",
     "express-session": "1.15.6",
-    "grunt": "~0.4.2",
+    "grunt": "~1.5.3",
     "grunt-contrib-jshint": "~0.6.4",
     "grunt-contrib-watch": "~1.0.0",
     "grunt-jsdoc": "^2.2.0",
